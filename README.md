@@ -2,6 +2,26 @@
 
 > **Bilingual documentation:** Portuguese (Brazil) first; full English version after the language separator. Both sections describe the same product, rules, and implementation goals. Do not execute their instructions twice.
 
+## Estado executável atual / Current executable status (2026-10-20)
+
+O projeto já possui um MVP Java 17/Maven executável. O Maven Wrapper fixa Maven 3.9.9, portanto não é necessário ter `mvn` instalado globalmente:
+
+```powershell
+.\mvnw.cmd clean verify
+java -jar target\clash-village-tracker.jar report --snapshot data\snapshot_2026-10-19.json --catalog data\upgrade_steps.json --gold-pass-boost 0.20 --output output --offline
+java -jar target\clash-village-tracker.jar validate-catalog --catalog data\upgrade_steps.json
+```
+
+A coleta isolada do perfil oficial também está implementada. Ela é online somente quando chamada explicitamente e exige o token no processo atual:
+
+```powershell
+$env:CLASH_API_TOKEN = "<seu-token>"
+java -jar target\clash-village-tracker.jar fetch-player --tag "#U8J89QP2" --output output
+Remove-Item Env:CLASH_API_TOKEN
+```
+
+`fetch-player` registra apenas os campos de topo comprovados para o recurso de jogador (`tag`, `name`, `townHallLevel`, `expLevel`, `troops`, `spells`, `heroes`, `heroEquipment`). O conteúdo dos arrays é preservado como JSON opaco. O comando **não** afirma coletar construções, Sobrecargas, filas ou cronômetros, não altera o snapshot manual e salva uma observação histórica em `output/supercell/`. Respostas 401, 403, 404, 429 e 5xx são diferenciadas; o token nunca é escrito em arquivo ou log.
+
 # Português (Brasil) — PT-BR
 
 ## 1. Visão geral
