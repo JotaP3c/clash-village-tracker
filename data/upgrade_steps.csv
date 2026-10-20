@@ -1,0 +1,216 @@
+﻿category,item,from_level,to_level,stage,count,base_days,pass_days,in_progress,remaining_now_days,source,confidence
+Defesas,Morteiro,17,18,Nível permanente,2,12.5,10.0,True,5.375,https://clashprogress.com/database/defenses/mortar,confirmado
+Sobrecargas,Morteiro,0,1,SC1,4,4,3.2,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Morteiro,1,2,SC2,4,6,4.800000000000001,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Defesas,Torre do Mago,15,16,Nível permanente,1,4.475,3.58,False,,print 19/10 (3d14h com Passe),confirmado
+Defesas,Torre do Mago,16,17,Nível permanente,1,,,False,,https://www.clash.ninja/guides/max-levels-for-each-th,tempo a validar
+Sobrecargas,Defesa Aérea,0,1,SC1,3,2.75,2.2,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Defesa Aérea,1,2,SC2,4,4.25,3.4000000000000004,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Torre de Bombas,0,1,SC1,2,2.5,2.0,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Torre de Bombas,1,2,SC2,2,4,3.2,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Tesla Oculta,0,1,SC1,5,4.5,3.6,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Tesla Oculta,1,2,SC2,5,6.5,5.2,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Torre Inferno,0,1,SC1,3,5,4.0,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Torre Inferno,1,2,SC2,3,7,5.6000000000000005,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,X-Besta,0,1,SC1,4,5.5,4.4,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,X-Besta,1,2,SC2,4,7.5,6.0,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Dispersor,0,1,SC1,2,5,4.0,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Dispersor,1,2,SC2,2,7,5.6000000000000005,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Cabana do Construtor,0,1,SC1,5,4,3.2,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Cabana do Construtor,1,2,SC2,5,6,4.800000000000001,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Monólito,0,1,SC1,1,5,4.0,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Monólito,1,2,SC2,1,7,5.6000000000000005,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Canhão Ricochete,0,1,SC1,3,6,4.800000000000001,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Canhão Ricochete,1,2,SC2,3,7,5.6000000000000005,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Torre Multi-Arqueira,0,1,SC1,3,6,4.800000000000001,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Torre Multi-Arqueira,1,2,SC2,3,7,5.6000000000000005,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Cuspidor de Fogo,0,1,SC1,2,6.5,5.2,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Cuspidor de Fogo,1,2,SC2,2,7.5,6.0,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Torre Multiengrenagem,0,1,SC1,0,6,4.800000000000001,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Torre Multiengrenagem,1,2,SC2,1,7,5.6000000000000005,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Torre de Super Mago,0,1,SC1,2,6,4.800000000000001,True,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Torre de Super Mago,1,2,SC2,2,7,5.6000000000000005,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Torre da Vingança,0,1,SC1,1,7,5.6000000000000005,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Torre da Vingança,1,2,SC2,1,8,6.4,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Mina de Ouro,0,1,SC1,6,2,1.6,True,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Mina de Ouro,1,2,SC2,7,3,2.4000000000000004,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Mina de Ouro,2,3,SC3,7,4,3.2,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Coletor de Elixir,0,1,SC1,6,2,1.6,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Coletor de Elixir,1,2,SC2,7,3,2.4000000000000004,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Coletor de Elixir,2,3,SC3,7,4,3.2,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Broca de Elixir Negro,0,1,SC1,2,3,2.4000000000000004,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Broca de Elixir Negro,1,2,SC2,3,4,3.2,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Sobrecargas,Broca de Elixir Negro,2,3,SC3,3,5,4.0,False,,https://www.clash.ninja/guides/what-are-supercharge-levels,confirmado
+Armadilhas,Bomba,13,14,Nível permanente,8,8,6.4,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Armadilha de Mola,12,13,Nível permanente,9,11,8.8,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Aérea,12,13,Nível permanente,7,9,7.2,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Gigante,11,12,Nível permanente,8,10.5,8.4,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Mina Aérea Guiada,7,8,Nível permanente,9,11.5,9.200000000000001,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Armadilha de Esqueleto,4,5,Nível permanente,4,7,5.6000000000000005,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Giga Bomba,3,4,Nível permanente,1,13,10.4,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Aérea adicional,0,1,Nível permanente,1,0,0.0,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Aérea adicional,1,2,Nível permanente,1,0.020833333333333332,0.016666666666666666,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Aérea adicional,2,3,Nível permanente,1,0.041666666666666664,0.03333333333333333,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Aérea adicional,3,4,Nível permanente,1,0.16666666666666666,0.13333333333333333,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Aérea adicional,4,5,Nível permanente,1,0.3333333333333333,0.26666666666666666,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Aérea adicional,5,6,Nível permanente,1,0.5,0.4,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Aérea adicional,6,7,Nível permanente,1,0.5833333333333334,0.46666666666666673,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Aérea adicional,7,8,Nível permanente,1,0.6666666666666666,0.5333333333333333,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Aérea adicional,8,9,Nível permanente,1,1,0.8,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Aérea adicional,9,10,Nível permanente,1,1.5,1.2000000000000002,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Aérea adicional,10,11,Nível permanente,1,2,1.6,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Aérea adicional,11,12,Nível permanente,1,3,2.4000000000000004,False,,https://www.clashtrack.online/data/traps,confirmado
+Armadilhas,Bomba Aérea adicional,12,13,Nível permanente,1,9,7.2,False,,https://www.clashtrack.online/data/traps,confirmado
+Muros,Muro,18,19,Nível permanente,300,,,False,,https://www.clash.ninja/guides/max-levels-for-each-th,tempo a validar
+Heróis,Rei Bárbaro,100,101,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/barbarian-king,confirmado
+Heróis,Rei Bárbaro,101,102,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/barbarian-king,confirmado
+Heróis,Rei Bárbaro,102,103,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/barbarian-king,confirmado
+Heróis,Rei Bárbaro,103,104,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/barbarian-king,confirmado
+Heróis,Rei Bárbaro,104,105,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/barbarian-king,confirmado
+Heróis,Rei Bárbaro,105,106,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/barbarian-king,confirmado
+Heróis,Rei Bárbaro,106,107,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/barbarian-king,confirmado
+Heróis,Rei Bárbaro,107,108,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/barbarian-king,confirmado
+Heróis,Rei Bárbaro,108,109,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/barbarian-king,confirmado
+Heróis,Rei Bárbaro,109,110,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/barbarian-king,confirmado
+Heróis,Rainha Arqueira,105,106,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/archer-queen,confirmado
+Heróis,Rainha Arqueira,106,107,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/archer-queen,confirmado
+Heróis,Rainha Arqueira,107,108,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/archer-queen,confirmado
+Heróis,Rainha Arqueira,108,109,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/archer-queen,confirmado
+Heróis,Rainha Arqueira,109,110,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/archer-queen,confirmado
+Heróis,Príncipe Servo,73,74,Nível permanente,1,7,5.6000000000000005,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,74,75,Nível permanente,1,7,5.6000000000000005,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,75,76,Nível permanente,1,7.5,6.0,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,76,77,Nível permanente,1,7.5,6.0,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,77,78,Nível permanente,1,7.5,6.0,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,78,79,Nível permanente,1,7.5,6.0,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,79,80,Nível permanente,1,7.5,6.0,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,80,81,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,81,82,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,82,83,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,83,84,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,84,85,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,85,86,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,86,87,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,87,88,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,88,89,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,89,90,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,90,91,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,91,92,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,92,93,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,93,94,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Príncipe Servo,94,95,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/minion-prince,confirmado
+Heróis,Grande Guardião,81,82,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/grand-warden,confirmado
+Heróis,Grande Guardião,82,83,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/grand-warden,confirmado
+Heróis,Grande Guardião,83,84,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/grand-warden,confirmado
+Heróis,Grande Guardião,84,85,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/grand-warden,confirmado
+Heróis,Dragon Duke,22,23,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/dragon-duke,confirmado
+Heróis,Dragon Duke,23,24,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/dragon-duke,confirmado
+Heróis,Dragon Duke,24,25,Nível permanente,1,8,6.4,False,,https://clashprogress.com/database/heroes/dragon-duke,confirmado
+Guardiões,Smasher,3,4,Nível permanente,1,,,True,9.833333333333334,print 19/10,tempo a validar
+Guardiões,Smasher,4,5,Nível permanente,1,13,10.4,False,,https://clashofclans.fandom.com/wiki/Smasher,confirmado
+Pets,Diggy,10,11,Nível permanente,1,,,False,,https://clashlevels.com/pet/diggy,tempo a validar
+Pets,Diggy,11,12,Nível permanente,1,,,False,,https://clashlevels.com/pet/diggy,tempo a validar
+Pets,Diggy,12,13,Nível permanente,1,,,False,,https://clashlevels.com/pet/diggy,tempo a validar
+Pets,Diggy,13,14,Nível permanente,1,,,False,,https://clashlevels.com/pet/diggy,tempo a validar
+Pets,Diggy,14,15,Nível permanente,1,,,False,,https://clashlevels.com/pet/diggy,tempo a validar
+Pets,Lagarto Venenoso,10,11,Nível permanente,1,6,4.800000000000001,False,,https://clashlevels.com/pet/poison-lizard,confirmado
+Pets,Lagarto Venenoso,11,12,Nível permanente,1,7,5.6000000000000005,False,,https://clashlevels.com/pet/poison-lizard,confirmado
+Pets,Lagarto Venenoso,12,13,Nível permanente,1,8,6.4,False,,https://clashlevels.com/pet/poison-lizard,confirmado
+Pets,Lagarto Venenoso,13,14,Nível permanente,1,8,6.4,False,,https://clashlevels.com/pet/poison-lizard,confirmado
+Pets,Lagarto Venenoso,14,15,Nível permanente,1,8,6.4,False,,https://clashlevels.com/pet/poison-lizard,confirmado
+Pets,Sneezy,8,9,Nível permanente,1,8,6.4,False,,https://clashlevels.com/pet/sneezy,confirmado
+Pets,Sneezy,9,10,Nível permanente,1,8,6.4,False,,https://clashlevels.com/pet/sneezy,confirmado
+Pets,Greedy Raven,2,3,Nível permanente,1,8,6.4,False,,https://clashlevels.com/pet/greedy-raven,confirmado
+Pets,Greedy Raven,3,4,Nível permanente,1,8,6.4,False,,https://clashlevels.com/pet/greedy-raven,confirmado
+Pets,Greedy Raven,4,5,Nível permanente,1,8,6.4,False,,https://clashlevels.com/pet/greedy-raven,confirmado
+Pets,Greedy Raven,5,6,Nível permanente,1,8,6.4,False,,https://clashlevels.com/pet/greedy-raven,confirmado
+Pets,Greedy Raven,6,7,Nível permanente,1,8,6.4,False,,https://clashlevels.com/pet/greedy-raven,confirmado
+Pets,Greedy Raven,7,8,Nível permanente,1,8,6.4,False,,https://clashlevels.com/pet/greedy-raven,confirmado
+Pets,Greedy Raven,8,9,Nível permanente,1,8,6.4,False,,https://clashlevels.com/pet/greedy-raven,confirmado
+Pets,Greedy Raven,9,10,Nível permanente,1,8,6.4,False,,https://clashlevels.com/pet/greedy-raven,confirmado
+Tropas,Bárbaro,12,13,Nível permanente,1,9.375,7.5,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Arqueira,13,14,Nível permanente,1,10.125,8.1,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Gigante,13,14,Nível permanente,1,13.5,10.8,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Goblin,9,10,Nível permanente,1,14,11.200000000000001,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Quebra-Muros,13,14,Nível permanente,1,14,11.200000000000001,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,P.E.K.K.A,12,13,Nível permanente,1,14.5,11.600000000000001,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Bebê Dragão,9,10,Nível permanente,1,7.25,5.800000000000001,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Bebê Dragão,10,11,Nível permanente,1,10,8.0,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Bebê Dragão,11,12,Nível permanente,1,15.25,12.200000000000001,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Mineiro,9,10,Nível permanente,1,7,5.6000000000000005,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Mineiro,10,11,Nível permanente,1,9.5,7.6000000000000005,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Mineiro,11,12,Nível permanente,1,14.5,11.600000000000001,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Dragão Elétrico,6,7,Nível permanente,1,9,7.2,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Dragão Elétrico,7,8,Nível permanente,1,10,8.0,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Dragão Elétrico,8,9,Nível permanente,1,16,12.8,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Cavaleiro de Dragão,5,6,Nível permanente,1,15.5,12.4,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Titã Elétrico,4,5,Nível permanente,1,16,12.8,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Root Rider,3,4,Nível permanente,1,16,12.8,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Thrower,3,4,Nível permanente,1,15,12.0,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Golem Meteoro,2,3,Nível permanente,1,,,False,,https://www.clashtrack.online/data/troops,tempo a validar
+Tropas,Servo,10,11,Nível permanente,1,4.5,3.6,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Servo,11,12,Nível permanente,1,5,4.0,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Servo,12,13,Nível permanente,1,9,7.2,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Servo,13,14,Nível permanente,1,14,11.200000000000001,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Corredor,12,13,Nível permanente,1,6.5,5.2,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Corredor,13,14,Nível permanente,1,10,8.0,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Corredor,14,15,Nível permanente,1,14.5,11.600000000000001,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Golem,11,12,Nível permanente,1,5.5,4.4,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Golem,12,13,Nível permanente,1,6,4.800000000000001,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Golem,13,14,Nível permanente,1,10,8.0,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Golem,14,15,Nível permanente,1,14.5,11.600000000000001,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Lava Hound,6,7,Nível permanente,1,8,6.4,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Lava Hound,7,8,Nível permanente,1,15.25,12.200000000000001,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Bowler,6,7,Nível permanente,1,7,5.6000000000000005,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Bowler,7,8,Nível permanente,1,7.5,6.0,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Bowler,8,9,Nível permanente,1,10,8.0,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Bowler,9,10,Nível permanente,1,15,12.0,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Caçadora,3,4,Nível permanente,1,15.5,12.4,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Druida,2,3,Nível permanente,1,9,7.2,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Druida,3,4,Nível permanente,1,11,8.8,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Druida,4,5,Nível permanente,1,12,9.600000000000001,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Druida,5,6,Nível permanente,1,15.5,12.4,False,,https://www.clashtrack.online/data/troops,confirmado
+Tropas,Ruin Witch,3,4,Nível permanente,1,,,False,,https://www.clashtrack.online/data/troops,tempo a validar
+Feitiços,Relâmpago,10,11,Nível permanente,1,7,5.6000000000000005,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Relâmpago,11,12,Nível permanente,1,10,8.0,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Relâmpago,12,13,Nível permanente,1,14,11.200000000000001,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Cura,9,10,Nível permanente,1,7,5.6000000000000005,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Cura,10,11,Nível permanente,1,10.5,8.4,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Cura,11,12,Nível permanente,1,15,12.0,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Fúria,6,7,Nível permanente,1,14,11.200000000000001,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Veneno,8,9,Nível permanente,1,7,5.6000000000000005,True,0.938888888888889,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Veneno,9,10,Nível permanente,1,8,6.4,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Veneno,10,11,Nível permanente,1,9.666666666666666,7.733333333333333,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Veneno,11,12,Nível permanente,1,14.5,11.600000000000001,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Terremoto,7,8,Nível permanente,1,13.5,10.8,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Congelamento,7,8,Nível permanente,1,15.5,12.4,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Aceleração,5,6,Nível permanente,1,9,7.2,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Aceleração,6,7,Nível permanente,1,12.5,10.0,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Esqueleto,7,8,Nível permanente,1,6,4.800000000000001,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Clone,8,9,Nível permanente,1,13.5,10.8,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Morcegos,5,6,Nível permanente,1,7,5.6000000000000005,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Morcegos,6,7,Nível permanente,1,8.5,6.800000000000001,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Morcegos,7,8,Nível permanente,1,13,10.4,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Supercrescimento,4,5,Nível permanente,1,16,12.8,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Retorno,4,5,Nível permanente,1,9,7.2,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Retorno,5,6,Nível permanente,1,11,8.8,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Retorno,6,7,Nível permanente,1,16,12.8,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Bloco de Gelo,3,4,Nível permanente,1,12,9.600000000000001,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Bloco de Gelo,4,5,Nível permanente,1,14,11.200000000000001,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Bloco de Gelo,5,6,Nível permanente,1,16,12.8,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Reviver,3,4,Nível permanente,1,11.5,9.200000000000001,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Reviver,4,5,Nível permanente,1,16,12.8,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Angry Spell,3,4,Nível permanente,1,15,12.0,False,,https://www.clashtrack.online/data/spells,confirmado
+Feitiços,Totem,3,4,Nível permanente,1,16,12.8,False,,https://www.clashtrack.online/data/spells,confirmado
+Máquinas de Cerco,Destruidor de Muros,4,5,Nível permanente,1,9,7.2,False,,https://www.clashtrack.online/data/sieges,confirmado
+Máquinas de Cerco,Destruidor de Muros,5,6,Nível permanente,1,13.5,10.8,False,,https://www.clashtrack.online/data/sieges,confirmado
+Máquinas de Cerco,Dirigível de Batalha,4,5,Nível permanente,1,9,7.2,False,,https://www.clashtrack.online/data/sieges,confirmado
+Máquinas de Cerco,Dirigível de Batalha,5,6,Nível permanente,1,13.5,10.8,False,,https://www.clashtrack.online/data/sieges,confirmado
+Máquinas de Cerco,Lançador de Pedras,5,6,Nível permanente,1,13.5,10.8,False,,https://www.clashtrack.online/data/sieges,confirmado
+Máquinas de Cerco,Quartel de Cerco,5,6,Nível permanente,1,15,12.0,False,,https://www.clashtrack.online/data/sieges,confirmado
+Máquinas de Cerco,Lançador de Troncos,5,6,Nível permanente,1,15,12.0,False,,https://www.clashtrack.online/data/sieges,confirmado
+Máquinas de Cerco,Broca de Batalha,3,4,Nível permanente,1,8,6.4,False,,https://www.clashtrack.online/data/sieges,confirmado
+Máquinas de Cerco,Broca de Batalha,4,5,Nível permanente,1,9,7.2,False,,https://www.clashtrack.online/data/sieges,confirmado
+Máquinas de Cerco,Broca de Batalha,5,6,Nível permanente,1,15.5,12.4,False,,https://www.clashtrack.online/data/sieges,confirmado
+Máquinas de Cerco,Sky Wagon,2,3,Nível permanente,1,13.5,10.8,False,,https://www.clashtrack.online/data/sieges,confirmado
+Máquinas de Cerco,Sky Wagon,3,4,Nível permanente,1,16,12.8,False,,https://www.clashtrack.online/data/sieges,confirmado

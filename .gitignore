@@ -1,0 +1,17 @@
+# Java / Maven
+target/
+*.class
+*.log
+
+# IntelliJ
+.idea/
+*.iml
+
+# Credenciais
+.env
+.env.*
+!.env.example
+*.key
+
+# Arquivos gerados
+output/
