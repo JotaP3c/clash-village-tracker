@@ -12,5 +12,6 @@ public enum SupercellApiFailure {
     TIMEOUT,
     TRANSPORT_ERROR,
     INVALID_RESPONSE,
+    PLAYER_TAG_MISMATCH,
     INTERRUPTED
 }

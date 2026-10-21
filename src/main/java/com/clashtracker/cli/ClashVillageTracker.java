@@ -81,6 +81,9 @@ public final class ClashVillageTracker {
             if (exception.statusCode() != null) {
                 err.println("HTTP status: " + exception.statusCode());
             }
+            if (exception.evidenceDirectory() != null) {
+                err.println("Evidência da resposta: " + exception.evidenceDirectory());
+            }
             if (exception.retryAfterSeconds() != null) {
                 err.println("Tente novamente após aproximadamente " + exception.retryAfterSeconds() + " segundo(s).");
             }
@@ -177,7 +180,10 @@ public final class ClashVillageTracker {
         out.println("Perfil oficial coletado em " + result.observation().observedAt());
         out.println("Jogador: " + result.observation().player().name()
                 + " (" + result.observation().player().tag() + ")");
-        out.println("Artefato: " + result.artifact());
+        out.println("Perfil interpretado: " + result.artifact());
+        out.println("Resposta integral: " + result.rawResponse());
+        out.println("Metadados da coleta: " + result.metadata());
+        out.println("SHA-256: " + result.bodySha256());
         out.println("Observação: este endpoint não fornece construções, Sobrecargas ou filas confirmadas.");
         return 0;
     }
@@ -292,9 +298,11 @@ public final class ClashVillageTracker {
         out.println("""
                 fetch-player — coleta somente o recurso oficial de jogador
                   --tag <#TAG>          tag bruta iniciada por #
-                  --output <directory>  diretório onde será salvo um JSON histórico
+                  --output <directory>  diretório-base das coletas locais imutáveis
 
-                Requer CLASH_API_TOKEN. Não coleta construções, Sobrecargas, filas ou cronômetros.
+                Cada coleta grava response.bin, metadata.json e, quando válido, player-profile.json
+                sob supercell/collections/<identificador>. Requer CLASH_API_TOKEN.
+                Não coleta construções, Sobrecargas, filas ou cronômetros.
                 """);
     }
 

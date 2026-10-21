@@ -2,7 +2,11 @@
 
 > **Bilingual documentation:** Portuguese (Brazil) first; full English version after the language separator. Both sections describe the same product, rules, and implementation goals. Do not execute their instructions twice.
 
-## Estado executável atual / Current executable status (2026-10-20)
+> **Próximas sessões (2026-10-21):** o MVP e E1 (captura integral da API) estão implementados e verificados localmente. Consulte o [roteiro de evolução](.kiro/specs/clash-village-sync/next-steps.md); PostgreSQL local é a próxima etapa. Comparação por período e frontend seguem planejados.
+>
+> **Next sessions (2026-10-21):** the MVP and E1 (complete API response capture) are implemented and locally verified. See the [evolution roadmap](.kiro/specs/clash-village-sync/next-steps.md); local PostgreSQL is the next stage. Period comparisons and a frontend remain planned.
+
+## Estado executável atual / Current executable status (2026-10-21)
 
 O projeto já possui um MVP Java 17/Maven executável. O Maven Wrapper fixa Maven 3.9.9, portanto não é necessário ter `mvn` instalado globalmente:
 
@@ -20,7 +24,7 @@ java -jar target\clash-village-tracker.jar fetch-player --tag "#U8J89QP2" --outp
 Remove-Item Env:CLASH_API_TOKEN
 ```
 
-`fetch-player` registra apenas os campos de topo comprovados para o recurso de jogador (`tag`, `name`, `townHallLevel`, `expLevel`, `troops`, `spells`, `heroes`, `heroEquipment`). O conteúdo dos arrays é preservado como JSON opaco. O comando **não** afirma coletar construções, Sobrecargas, filas ou cronômetros, não altera o snapshot manual e salva uma observação histórica em `output/supercell/`. Respostas 401, 403, 404, 429 e 5xx são diferenciadas; o token nunca é escrito em arquivo ou log.
+Cada execução de `fetch-player` cria uma pasta própria em `output/supercell/collections/`: `response.bin` guarda os bytes exatos da resposta, `metadata.json` registra tags, status, instante, codificação, tamanho e SHA-256, e `player-profile.json` guarda o perfil interpretado apenas quando a resposta é válida e a tag confere. Campos adicionais permanecem na evidência bruta, mesmo sem DTO. Respostas HTTP rejeitadas, JSON inválido e tag divergente preservam a evidência e não criam perfil. A captura não altera o snapshot manual nem a planilha. A API mapeada continua restrita aos campos comprovados (`tag`, `name`, `townHallLevel`, `expLevel`, `troops`, `spells`, `heroes`, `heroEquipment`); construções, Sobrecargas, filas e cronômetros não são presumidos. O token não é escrito em metadados ou logs.
 
 # Português (Brasil) — PT-BR
 
@@ -644,6 +648,8 @@ O projeto cumpriu sua primeira missão quando o usuário consegue executar local
 ## 1. Overview
 
 **Clash Village Tracker** is a Java application for analyzing and tracking a **Clash of Clans** village toward **fully maxed status** under a chosen version of the game's catalog. It imports evidence from multiple sources, preserves history, reconciles levels, calculates outstanding upgrades and Supercharges, and produces a usable Excel workbook. Official API integration and JasperReports will be introduced incrementally.
+
+The offline MVP and E1 API evidence capture are implemented. Each explicit `fetch-player` run creates a unique collection under `output/supercell/collections/`: `response.bin` preserves the exact response body bytes, `metadata.json` stores allowlisted collection details and SHA-256, and `player-profile.json` stores the interpreted profile only when parsing and tag validation succeed. Invalid HTTP responses, malformed JSON and tag mismatches keep their response evidence without producing a profile. This command does not update the historical snapshot or workbook. Credentials are read from `CLASH_API_TOKEN` and are not written to collection metadata or logs.
 
 This is **not a game automation bot**: it **does not perform upgrades, attacks, or actions on the account**. It reads authorized data and generates local analysis and reports.
 

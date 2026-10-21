@@ -2,6 +2,10 @@
 
 > **Instructions:** The Portuguese and English sections below are equivalent versions of the **same request**. Send only **one** language version to the Kiro chat; do not run both independently. Keep the resulting source code identifiers and CLI flags in English.
 
+> **Continuação (2026-10-21):** este é o pedido original do MVP, que já possui implementação; preserve-o como referência, sem executá-lo de novo. A captura E1 da resposta da API foi implementada e testada. Para o próximo incremento, execute somente E2 conforme [PROMPT_PROXIMOS_PASSOS_KIRO.md](PROMPT_PROXIMOS_PASSOS_KIRO.md) e [roteiro atual](.kiro/specs/clash-village-sync/next-steps.md). PostgreSQL/Flyway são a próxima implementação; Spring Boot para API de leitura e Angular em `frontend/` no mesmo repositório são recomendações para etapas posteriores, ainda não implementadas.
+>
+> **Continuation (2026-10-21):** this is the original MVP request, which already has an implementation; keep it as a reference and do not run it again. E1, full API response capture, has been implemented and tested. For the next increment, execute only E2 from [PROMPT_PROXIMOS_PASSOS_KIRO.md](PROMPT_PROXIMOS_PASSOS_KIRO.md) and the [current roadmap](.kiro/specs/clash-village-sync/next-steps.md). PostgreSQL/Flyway is the next implementation; Spring Boot for a read API and Angular under `frontend/` in the same repository are recommendations for later phases and are not implemented yet.
+
 # Português (Brasil) — PT-BR
 
 ## Papel e objetivo

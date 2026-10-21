@@ -5,6 +5,18 @@ Portal: https://developer.clashofclans.com/ . Endpoint típico: `GET https://api
 
 Campos publicados/documentados no recurso de jogador: `tag`, `name`, `townHallLevel`, `expLevel`, `troops`, `spells`, `heroes`, `heroEquipment` (ver contrato vigente). **Não assumir** arrays de edifícios, SC e cronômetros de upgrades sem validação.
 
+O comando local `fetch-player` captura o corpo HTTP como bytes antes de decodificar o JSON. Cada execução cria uma pasta única em `output/supercell/collections/` com `response.bin`, `metadata.json` (tag solicitada e retornada, endpoint, status, instantes, Content-Type/codificação, tamanho e SHA-256) e, somente após parse estrutural válido e tag correspondente, `player-profile.json` com o DTO interpretado. A presença de `metadata.json` sela uma coleção completa; diretórios sem ele resultam de falha de persistência e não são considerados coletas concluídas. Erros HTTP, JSON malformado e tag incompatível mantêm o corpo e o diagnóstico, sem perfil. Nenhuma coleta sobrescreve outra.
+
+Execução manual no PowerShell (a chave fica somente no ambiente do processo):
+
+```powershell
+$env:CLASH_API_TOKEN = "<seu-token>"
+java -jar target\clash-village-tracker.jar fetch-player --tag "#U8J89QP2" --output output
+Remove-Item Env:CLASH_API_TOKEN
+```
+
+O perfil API não é mesclado automaticamente ao snapshot ou à planilha. Testes usam servidor HTTP local; uma chamada real só pode ser declarada após uma execução manual com o ambiente configurado.
+
 ## Exportação de vila (dado essencial para esta automação)
 O jogo passou a oferecer opção de **exportar a vila para a área de transferência**; o Clash Ninja relata que essa exportação inclui níveis de construções e melhorias ativas e pode atualizar trackers. URL: https://www.clash.ninja/blog/one-tap-village-updating-is-here
 

@@ -1,6 +1,7 @@
 package com.clashtracker.integration.supercell;
 
 import com.clashtracker.util.JsonSupport;
+import com.clashtracker.util.Hashing;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
@@ -18,6 +19,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -73,6 +75,54 @@ class JavaHttpSupercellPlayerClientTest {
         assertTrue(profile.spells().isEmpty());
         assertNull(profile.heroes());
         assertNull(profile.heroEquipment());
+    }
+
+    @Test
+    void captureKeepsExactBytesAndUnmappedFieldsBeforeParsing() throws Exception {
+        String body = "{\"tag\":\"#TEST\",\"name\":\"Café\",\"troops\":[],"
+                + "\"unmappedField\":{\"value\":17}}";
+        JavaHttpSupercellPlayerClient client = client(200, body, Map.of(), Duration.ofSeconds(2), 0);
+
+        SupercellPlayerCapture capture = client.capturePlayer("#TEST");
+        byte[] expected = body.getBytes(StandardCharsets.UTF_8);
+
+        assertArrayEquals(expected, capture.body());
+        assertEquals(Hashing.sha256(expected), capture.bodySha256());
+        assertNotNull(capture.receivedAt());
+        assertEquals("#TEST", capture.requestedPlayerTag());
+        assertEquals("#TEST", capture.returnedPlayerTag());
+        assertEquals("UTF-8", capture.charset());
+        assertEquals("Café", capture.profile().name());
+        assertFalse(mapper.writeValueAsString(capture.profile()).contains("unmappedField"));
+    }
+
+    @Test
+    void capturesMismatchedReturnedTagAsEvidenceWithoutReturningAProfile() throws Exception {
+        String body = "{\"tag\":\"#OTHER\",\"name\":\"Wrong player\"}";
+        JavaHttpSupercellPlayerClient client = client(200, body, Map.of(), Duration.ofSeconds(2), 0);
+
+        SupercellPlayerCapture capture = client.capturePlayer("#TEST");
+
+        assertEquals("#TEST", capture.requestedPlayerTag());
+        assertEquals("#OTHER", capture.returnedPlayerTag());
+        assertNull(capture.profile());
+        assertEquals(SupercellApiFailure.PLAYER_TAG_MISMATCH, capture.failure().failure());
+        assertArrayEquals(body.getBytes(StandardCharsets.UTF_8), capture.body());
+    }
+
+    @Test
+    void capturesHttpFailureBodyAndSafeMetadataInsteadOfDiscardingIt() throws Exception {
+        String body = "{\"reason\":\"rate limit\"}";
+        JavaHttpSupercellPlayerClient client = client(429, body, Map.of("Retry-After", "17"),
+                Duration.ofSeconds(2), 0);
+
+        SupercellPlayerCapture capture = client.capturePlayer("#TEST");
+
+        assertArrayEquals(body.getBytes(StandardCharsets.UTF_8), capture.body());
+        assertEquals(429, capture.httpStatus());
+        assertEquals(SupercellApiFailure.RATE_LIMITED, capture.failure().failure());
+        assertEquals(17L, capture.failure().retryAfterSeconds());
+        assertNull(capture.profile());
     }
 
     @Test

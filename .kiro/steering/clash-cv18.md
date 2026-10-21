@@ -17,3 +17,9 @@ Antes de planejar, modificar ou implementar qualquer rotina:
 8. Registre fonte, versão e confiança por campo; não marque a vila 100% FULL enquanto existirem lacunas.
 
 O fluxo de implementação encontra-se em `.kiro/specs/clash-village-sync/`.
+
+## Direção atual — 2026-10-20
+
+O MVP offline e `fetch-player` já existem. Para novas sessões, seguir `.kiro/specs/clash-village-sync/next-steps.md` e `PROMPT_PROXIMOS_PASSOS_KIRO.md`, sem recriar o projeto inicial.
+
+O usuário escolheu PostgreSQL local, com DBeaver para inspeção, histórico comparável por período e frontend futuro. Próximo incremento: E1, captura integral da API. Banco, consultas temporais e interface são etapas posteriores documentadas, ainda não implementadas. Manter o modo offline e nunca inventar snapshots para datas sem coleta.
