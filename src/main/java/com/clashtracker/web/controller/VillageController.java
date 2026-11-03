@@ -3,8 +3,10 @@ package com.clashtracker.web.controller;
 import com.clashtracker.importer.InputDataException;
 import com.clashtracker.web.dto.CategoryResponse;
 import com.clashtracker.web.dto.DashboardResponse;
+import com.clashtracker.web.dto.OfficialProfileResponse;
 import com.clashtracker.web.dto.SnapshotResponse;
 import com.clashtracker.web.dto.UpgradeResponse;
+import com.clashtracker.web.service.OfficialProfileService;
 import com.clashtracker.web.service.VillageDashboardService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class VillageController {
 
     private final VillageDashboardService service;
+    private final OfficialProfileService officialProfileService;
 
-    public VillageController(VillageDashboardService service) {
+    public VillageController(VillageDashboardService service,
+                            OfficialProfileService officialProfileService) {
         this.service = service;
+        this.officialProfileService = officialProfileService;
     }
 
     @GetMapping("/dashboard")
@@ -42,5 +47,14 @@ public class VillageController {
     @GetMapping("/upgrades")
     public UpgradeResponse upgrades() throws InputDataException {
         return service.upgrades();
+    }
+
+    /**
+     * Most recent official Supercell API collection produced by {@code fetch-player}. Reads local
+     * evidence only; when no collection exists, responds with {@code available=false}.
+     */
+    @GetMapping("/official-profile")
+    public OfficialProfileResponse officialProfile() {
+        return officialProfileService.latest();
     }
 }
