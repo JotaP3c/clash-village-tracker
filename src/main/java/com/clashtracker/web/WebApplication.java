@@ -2,6 +2,9 @@ package com.clashtracker.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 /**
@@ -13,7 +16,13 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
  * shade plugin into {@code clash-village-tracker.jar}. This application is packaged separately as
  * {@code clash-village-tracker-web.jar}.
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+        // Persistence is wired manually in PersistenceConfiguration and is active only when
+        // tracker.db.enabled=true, so the app can start and serve the offline dashboard with no DB.
+        DataSourceAutoConfiguration.class,
+        DataSourceTransactionManagerAutoConfiguration.class,
+        FlywayAutoConfiguration.class
+})
 @ConfigurationPropertiesScan
 public class WebApplication {
 

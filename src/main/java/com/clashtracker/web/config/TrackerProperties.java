@@ -24,6 +24,17 @@ public class TrackerProperties {
     /** Gold Pass time reduction applied to eligible future steps (0..1). */
     private BigDecimal goldPassBoost = new BigDecimal("0.20");
 
+    /** Directory that holds fetch-player collections (official-API evidence). */
+    private String collectionsPath = "output/supercell/collections";
+
+    public String getCollectionsPath() {
+        return collectionsPath;
+    }
+
+    public void setCollectionsPath(String collectionsPath) {
+        this.collectionsPath = collectionsPath;
+    }
+
     public String getSnapshotPath() {
         return snapshotPath;
     }
