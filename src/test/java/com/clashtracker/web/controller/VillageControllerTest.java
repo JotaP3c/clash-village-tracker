@@ -5,6 +5,7 @@ import com.clashtracker.importer.InputDataException;
 import com.clashtracker.util.JsonSupport;
 import com.clashtracker.web.config.TrackerProperties;
 import com.clashtracker.web.dto.DashboardResponse;
+import com.clashtracker.web.service.OfficialProfileService;
 import com.clashtracker.web.service.VillageDashboardService;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -28,13 +29,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class VillageControllerTest {
 
     private static VillageController controllerWithRealData() {
+        TrackerProperties properties = propertiesForRealData();
+        VillageDashboardService service =
+                new VillageDashboardService(new ReportApplication(JsonSupport.createMapper()), properties);
+        OfficialProfileService officialProfileService = new OfficialProfileService(
+                properties, JsonSupport.createMapper(), java.util.Optional.empty());
+        return new VillageController(service, officialProfileService);
+    }
+
+    private static TrackerProperties propertiesForRealData() {
         Path moduleRoot = locateModuleRoot();
         TrackerProperties properties = new TrackerProperties();
         properties.setSnapshotPath(moduleRoot.resolve("data/snapshot_2026-10-19.json").toString());
         properties.setCatalogPath(moduleRoot.resolve("data/upgrade_steps.json").toString());
-        VillageDashboardService service =
-                new VillageDashboardService(new ReportApplication(JsonSupport.createMapper()), properties);
-        return new VillageController(service);
+        return properties;
     }
 
     @Test
@@ -73,7 +81,8 @@ class VillageControllerTest {
         properties.setSnapshotPath(missing.toString());
         properties.setCatalogPath(missing.toString());
         VillageController controller = new VillageController(
-                new VillageDashboardService(new ReportApplication(JsonSupport.createMapper()), properties));
+                new VillageDashboardService(new ReportApplication(JsonSupport.createMapper()), properties),
+                new OfficialProfileService(properties, JsonSupport.createMapper(), java.util.Optional.empty()));
 
         // The controller surfaces the checked InputDataException...
         InputDataException thrown = assertThrows(InputDataException.class, controller::dashboard);
