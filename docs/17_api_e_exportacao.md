@@ -82,3 +82,47 @@ Main class: `com.clashtracker.web.WebApplication` (packaged separately as `clash
 External configuration (`application.properties` or environment variables): `tracker.snapshot-path`, `tracker.catalog-path`, `tracker.previous-snapshot-path` (optional, enables diff), `tracker.gold-pass-boost` (default `0.20`), `server.port` (default `8080`).
 
 Endpoints (all `GET`, prefix `/api`): `/api/health`, `/api/village/dashboard`, `/api/village/snapshot`, `/api/village/categories`, `/api/village/upgrades`. CORS is restricted to the Angular dev server during development. Progress is a cataloged step-count metric, not an official Supercell percentage; `fullCertified` stays `false` while the catalog is `legacy-unversioned`/incomplete.
+
+## Persistência SQL Server (E2) e perfil oficial no dashboard (Opção A) — PT-BR
+
+A partir de 2026-11-03 o backend persiste o histórico em **SQL Server** (o usuário possui SQL Server 2019 Express local; não havia PostgreSQL instalado). A persistência é **opcional e desligada por padrão** (`tracker.db.enabled=false`), para a API continuar subindo e servindo o dashboard offline mesmo sem banco.
+
+### Banco e credenciais
+- Banco dedicado: `clash_village_tracker_dev` (criado sem alterar os demais bancos da instância).
+- A autenticação integrada do `mssql-jdbc` exige uma DLL nativa (`mssql-jdbc_auth`) que não acompanha o driver; por isso usa-se **autenticação SQL** com um login dedicado `clash_app` (papel `db_owner` apenas no banco de desenvolvimento).
+- A senha nunca fica em arquivo versionado. Ela é lida da variável de ambiente `CLASH_DB_PASSWORD`. Conexão/usuário podem ser sobrescritos por `CLASH_DB_URL` e `CLASH_DB_USER`.
+
+### Dependências e migrações
+- `spring-boot-starter-jdbc`, `com.microsoft.sqlserver:mssql-jdbc` e Flyway (`flyway-core` + `flyway-sqlserver`).
+- Migração versionada `src/main/resources/db/migration/V1__initial_schema.sql` cria `village_snapshot`, `village_entity_observation` e `official_api_collection`. As migrações rodam explicitamente no startup **apenas quando a persistência está habilitada**; nunca durante `report`/`fetch-player`.
+
+### Endpoints de persistência (ativos só com banco habilitado)
+
+| Rota | Método | Conteúdo |
+|---|---|---|
+| `/api/db/status` | GET | `persistenceEnabled` e contagem de snapshots. |
+| `/api/db/import-snapshot` | POST | Importa o snapshot histórico configurado (idempotente). 503 se a persistência estiver desligada. |
+| `/api/db/snapshots?playerTag=#U8J89QP2` | GET | Lista os snapshots armazenados (data de observação `DATE` separada do instante de importação). |
+
+### Perfil oficial (Opção A)
+
+| Rota | Método | Conteúdo |
+|---|---|---|
+| `/api/village/official-profile` | GET | Lê a **coleta mais recente** gravada por `fetch-player` em `output/supercell/collections/` e projeta tag/name/TH/XP e as contagens de heróis/tropas/feitiços/equipamentos. Quando não há coleta, responde `available=false` com orientação. Não chama a API nem inventa dados. |
+
+Execução local com banco:
+
+```powershell
+$env:CLASH_DB_PASSWORD = "<senha-do-login-clash_app>"
+.\mvnw.cmd -s ci-settings.xml spring-boot:run -Dspring-boot.run.arguments=--tracker.db.enabled=true
+# importar o snapshot histórico:  curl -X POST http://localhost:8080/api/db/import-snapshot
+Remove-Item Env:CLASH_DB_PASSWORD
+```
+
+## SQL Server persistence (E2) and official profile on the dashboard (Option A) — EN
+
+Since 2026-11-03 the backend persists history in **SQL Server** (the user has a local SQL Server 2019 Express; no PostgreSQL was installed). Persistence is **optional and disabled by default** (`tracker.db.enabled=false`) so the API still starts and serves the offline dashboard without a database.
+
+Dedicated database `clash_village_tracker_dev`; SQL authentication via a dedicated `clash_app` login (integrated auth needs a native DLL the driver does not ship). The password comes only from `CLASH_DB_PASSWORD`, never a versioned file. Dependencies: `spring-boot-starter-jdbc`, `mssql-jdbc`, Flyway (`flyway-core` + `flyway-sqlserver`); migration `V1__initial_schema.sql` creates the snapshot/entity/collection tables and runs at startup only when persistence is enabled.
+
+New endpoints (DB enabled): `GET /api/db/status`, `POST /api/db/import-snapshot` (idempotent), `GET /api/db/snapshots`. Option A: `GET /api/village/official-profile` reads the latest `fetch-player` collection from disk and never calls the API or fabricates data.

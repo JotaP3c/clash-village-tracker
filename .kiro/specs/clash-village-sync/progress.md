@@ -2,6 +2,35 @@
 
 Data: 2026-10-21 (ver também o checkpoint 2026-11-03 abaixo)
 
+## Entrega E2 (SQL Server) + Opção A (perfil oficial) — 2026-11-03
+
+Mudança de alvo de persistência: o usuário possui **SQL Server 2019 Express** local (instância padrão `MSSQLSERVER`, modo MIXED) e não tinha PostgreSQL. O E2 foi implementado e verificado contra SQL Server; menções a PostgreSQL/pgJDBC/DBeaver nas etapas de persistência passam a valer para SQL Server/mssql-jdbc/sqlcmd.
+
+### Banco e segurança
+- Criado o banco dedicado `clash_village_tracker_dev` (sem alterar `master`, `msdb`, `shared_planner_dev`, `VETORH_HCM` etc.).
+- Autenticação integrada do mssql-jdbc exige a DLL nativa `mssql-jdbc_auth` (ausente → `UnsatisfiedLinkError`). Optou-se por **autenticação SQL** com login dedicado `clash_app` (db_owner só no banco dev). A senha nunca fica em arquivo versionado: vem de `CLASH_DB_PASSWORD`. O script de criação do login foi apagado após uso.
+
+### Backend
+- `pom.xml`: `spring-boot-starter-jdbc`, `mssql-jdbc` 12.8.1.jre11, `flyway-core` + `flyway-sqlserver` (via BOM). Flag `-parameters` no compiler (para binding de `@RequestParam`).
+- Migração Flyway `V1__initial_schema.sql`: `village_snapshot`, `village_entity_observation`, `official_api_collection`.
+- `PersistenceConfiguration` ativa só com `tracker.db.enabled=true` (DataSource Hikari + Flyway `migrate` + `JdbcTemplate` + repositórios). As auto-configs de DataSource/Flyway do Boot foram excluídas para a app subir sem banco por padrão.
+- Repositórios `SnapshotRepository` e `OfficialCollectionRepository`; serviços `SnapshotImportService` e `OfficialProfileService` (ambos tolerantes a banco ausente via `Optional`).
+- Endpoints novos: `POST /api/db/import-snapshot`, `GET /api/db/snapshots`, `GET /api/db/status` (503 claro quando persistência desligada) e `GET /api/village/official-profile` (Opção A).
+
+### Frontend
+- Modelos + método `officialProfile()` no serviço; painel "Perfil oficial" no dashboard (carregado com `catchError` → nunca quebra a página). Mostra heróis/tropas/feitiços/equipamentos e o aviso de limitação da API pública.
+
+### Verificação (executada)
+- `mvnw -s ci-settings.xml -o test`: **64 testes, 0 falhas** (suíte padrão; `*IT` não roda no surefire).
+- `mvnw -s ci-settings.xml -o -Dtest=SnapshotRepositoryIT ... test` com `CLASH_DB_PASSWORD` no ambiente: **1 teste, 0 falhas** — Flyway valida a migração, importa o snapshot, prova idempotência e lê de volta no SQL Server real.
+- Servidor com `--tracker.db.enabled=true`: Flyway aplicou `V1`; `POST /api/db/import-snapshot` (idempotente, `importedSnapshotId=1` nas duas chamadas), `GET /api/db/snapshots` retorna 1 snapshot/123 entidades/`observedDate=2026-10-19`; conferido por `sqlcmd` (1 snapshot, 123 entity rows). `GET /api/village/official-profile` → `available=false` com orientação (nenhuma coleta ainda).
+- Frontend: `ng test` **9/9**; `ng build` de produção OK.
+
+### Limitações / próximo passo
+- Comparação por período (E4) ainda não existe: há só o snapshot de 19/10; o gráfico temporal depende de uma segunda coleta.
+- A DLL de auth integrada do SQL Server não foi instalada (decisão: usar login SQL dedicado).
+- Perfil oficial no dashboard aparece como "sem coleta" até você rodar `fetch-player` com o `CLASH_API_TOKEN`.
+
 ## Entrega E5 + E6 — aplicação web full-stack — 2026-11-03
 
 Mudança de direção do produto: o foco deixou de ser o Excel e passou a ser uma aplicação web full-stack com integração real backend↔frontend. Foram implementadas, de forma pragmática e verticalmente completa, as etapas E5 (API de leitura) e E6 (Angular com dados reais), sem introduzir PostgreSQL (E2/E3/E4 de persistência permanecem planejadas e não são pré-requisito do MVP web).

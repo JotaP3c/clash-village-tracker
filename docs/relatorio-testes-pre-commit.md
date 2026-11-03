@@ -79,7 +79,26 @@ Nenhum teste existente foi removido ou enfraquecido.
 | VillageControllerTest | 4 | ✅ 0 falhas |
 | VillageDashboardServiceRulesTest | 6 | ✅ 0 falhas |
 | VillageDashboardServiceTest | 5 | ✅ 0 falhas |
-| **Total** | **59** | **✅ 0 falhas, 0 erros, 0 ignorados** |
+| OfficialProfileServiceTest | 4 | ✅ 0 falhas |
+| SnapshotImportServiceTest | 1 | ✅ 0 falhas |
+| **Subtotal (suíte padrão / standard suite)** | **64** | **✅ 0 falhas** |
+| SnapshotRepositoryIT (integração SQL Server) | 1 | ✅ 0 falhas (executado com `CLASH_DB_PASSWORD`) |
+| **Total** | **65** | **✅ 0 falhas, 0 erros, 0 ignorados** |
+
+### Atualização 2026-11-03 — E2 (SQL Server) + Opção A
+
+Novos testes adicionados nesta etapa:
+- `OfficialProfileServiceTest` (4): leitura da coleta mais recente do `fetch-player`; ausência de coleta/metadata; escolha da coleta mais recente sem inventar arrays; resposta rejeitada mantém evidência sem perfil.
+- `SnapshotImportServiceTest` (1): persistência desligada é reportada e o import falha com estado claro (não finge gravar).
+- `SnapshotRepositoryIT` (1, integração): roda só quando `CLASH_DB_PASSWORD` existe; aplica Flyway, importa o snapshot histórico, prova idempotência e lê de volta no SQL Server real (`observed_date=2026-10-19`, 123 entidades). Verificado também por `sqlcmd`.
+
+Comandos:
+```powershell
+.\mvnw.cmd -s ci-settings.xml -o test                                   # 64 testes
+$env:CLASH_DB_PASSWORD='<senha>'; .\mvnw.cmd -s ci-settings.xml -o -Dtest=SnapshotRepositoryIT test   # +1 integração
+```
+
+> Nota: o `maven-surefire-plugin` não executa classes `*IT` na fase `test` (convenção reservada ao failsafe); por isso a integração roda por invocação explícita. O banco físico foi criado e migrado nesta máquina.
 
 ## 7. Resultado da compilação/build
 

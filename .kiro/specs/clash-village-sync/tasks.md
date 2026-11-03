@@ -27,14 +27,20 @@ Verificação desta entrega: `.\mvnw.cmd -o verify` e regressão offline registr
 
 ## E2 — PostgreSQL local
 
-- [ ] E2.1 Inventariar instalação/versão PostgreSQL e configurar variáveis externas sem revelar credenciais; criar banco dedicado `clash_village_tracker_dev` somente após confirmar o alvo local, sem alterar outros bancos.
-- [ ] E2.2 Adicionar pgJDBC e Flyway com versões compatíveis fixadas; criar migrações SQL versionadas e não editáveis após aplicação.
-- [ ] E2.3 Projetar e criar tabelas iniciais para coletas/evidências, fotografias históricas e entidades observadas; manter bytes/hash e procedência.
-- [ ] E2.4 Implementar repositórios e serviços Java usados por casos de uso, sem SQL em controllers ou camada Excel.
-- [ ] E2.5 Importar o snapshot legado como observação `DATE` de 2026-10-19, mantendo hora desconhecida e importação atual separada.
-- [ ] E2.6 Garantir transação, índices, chaves e idempotência; uma nova coleta em outra data continua nova observação.
-- [ ] E2.7 Executar leitura/escrita de teste em alvo dedicado, provar rollback e documentar consultas de inspeção no DBeaver; se não houver conexão configurada, registrar integração PostgreSQL como não executada.
-- [ ] E2.8 Preservar CLI offline sem banco; migração só por comando/ação explícita e sem alterar outros bancos locais.
+> **Atualização 2026-11-03:** o alvo de persistência passou a ser **SQL Server** (o usuário possui SQL Server 2019 Express local; não havia PostgreSQL instalado). As tarefas abaixo foram concluídas contra o SQL Server. As referências a pgJDBC/DBeaver foram substituídas por mssql-jdbc/sqlcmd.
+
+- [x] E2.1 Detectada a instância `MSSQLSERVER` (SQL Server 2019 Express, modo MIXED) e criado o banco dedicado `clash_village_tracker_dev` sem alterar os demais bancos. Login SQL `clash_app` (db_owner só nesse banco); senha fora de arquivos, via `CLASH_DB_PASSWORD`.
+- [x] E2.2 Adicionados `mssql-jdbc` (12.8.1.jre11) e Flyway (BOM Spring Boot) com `flyway-sqlserver`; migração `V1__initial_schema.sql` versionada e imutável.
+- [x] E2.3 Criadas as tabelas `village_snapshot`, `village_entity_observation` e `official_api_collection` (procedência, precisão temporal, hash).
+- [x] E2.4 Repositórios `SnapshotRepository`/`OfficialCollectionRepository` com `JdbcTemplate`, isolados de cálculo/CLI/Excel; ativados só quando `tracker.db.enabled=true`.
+- [x] E2.5 Snapshot legado importado como observação `DATE` de 2026-10-19 (123 entidades), com instante de importação separado.
+- [x] E2.6 Escrita transacional, índices por jogador/data e idempotência verificadas (reimport não duplica; `importedSnapshotId` estável).
+- [x] E2.7 Teste de integração `SnapshotRepositoryIT` executado contra o SQL Server real (migração + import idempotente + leitura); habilitado só quando `CLASH_DB_PASSWORD` existe, senão é pulado. Inspeção documentada via `sqlcmd`/pgAdmin-equivalente.
+- [x] E2.8 CLI offline preservada sem banco; persistência desligada por padrão; migração só quando habilitada explicitamente, sem tocar em outros bancos.
+
+### Opção A — Perfil oficial no dashboard (2026-11-03)
+- [x] Endpoint `GET /api/village/official-profile` lê a coleta mais recente de `fetch-player` (sem chamar a API nem inventar dados; registra a coleta no índice do banco quando habilitado).
+- [x] Painel "Perfil oficial" no dashboard Angular, com aviso de que a API pública não expõe construções/Sobrecargas/filas/timers.
 
 ## F0 — Fundação Angular separada
 

@@ -23,8 +23,16 @@ java -jar target\clash-village-tracker.jar validate-catalog --catalog data\upgra
 # API REST de leitura (porta 8080) / read-only REST API (port 8080)
 .\mvnw.cmd -s ci-settings.xml spring-boot:run
 # ou / or:  java -jar target\clash-village-tracker-web.jar
-# Endpoints: GET /api/health, /api/village/dashboard, /api/village/snapshot, /api/village/categories, /api/village/upgrades
+# Endpoints: GET /api/health, /api/village/dashboard, /api/village/snapshot,
+#            /api/village/categories, /api/village/upgrades, /api/village/official-profile
+
+# Com persistência SQL Server (opcional) / with SQL Server persistence (optional)
+$env:CLASH_DB_PASSWORD = "<senha do login clash_app / the clash_app login password>"
+.\mvnw.cmd -s ci-settings.xml spring-boot:run -Dspring-boot.run.arguments=--tracker.db.enabled=true
+# Endpoints de banco / DB endpoints: GET /api/db/status, POST /api/db/import-snapshot, GET /api/db/snapshots
 ```
+
+Persistência / Persistence: **SQL Server** (banco dedicado `clash_village_tracker_dev`, login `clash_app`, Flyway + mssql-jdbc). Desligada por padrão; a API sobe sem banco. A senha vem só de `CLASH_DB_PASSWORD` (nunca versionada). / SQL Server with a dedicated database and login, Flyway migrations; disabled by default so the API runs without a database; password only via `CLASH_DB_PASSWORD`.
 
 Frontend (repositório separado `clash-village-tracker-frontend`, Angular 21 + Node 22.12.0):
 
