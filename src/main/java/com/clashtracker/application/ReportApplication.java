@@ -66,14 +66,19 @@ public final class ReportApplication {
         return new CatalogValidationResult(status(issues, true), catalog, issues);
     }
 
-    public ReportExecutionResult generate(ReportRequest request) throws InputDataException, IOException {
+    /**
+     * Runs the full offline pipeline up to the calculation stage WITHOUT writing any artifact to
+     * disk. Returns a read-only projection suitable for serving a web dashboard. The Excel workbook
+     * and historical artifacts are produced only by {@link #generate(ReportRequest)}.
+     */
+    public VillageAnalysis analyze(ReportRequest request) throws InputDataException {
         LoadedSnapshot loadedSnapshot = snapshotImporter.load(request.snapshotPath());
         LoadedCatalog loadedCatalog = catalogImporter.load(request.catalogPath());
         List<ValidationIssue> issues = new ArrayList<>();
         issues.addAll(snapshotValidator.validate(loadedSnapshot.raw()));
         issues.addAll(catalogValidator.validateRaw(loadedCatalog));
         if (hasErrors(issues)) {
-            return failed("Structural validation failed; no report was generated", issues);
+            return analysisFailed("Structural validation failed; no analysis was produced", issues);
         }
 
         VillageSnapshot incoming = snapshotNormalizer.normalize(loadedSnapshot);
@@ -81,7 +86,7 @@ public final class ReportApplication {
         issues.addAll(catalogValidator.validateNormalized(catalog));
         issues.addAll(crossValidator.validate(incoming, catalog));
         if (hasErrors(issues)) {
-            return failed("Cross-source structural validation failed; no report was generated", issues);
+            return analysisFailed("Cross-source structural validation failed; no analysis was produced", issues);
         }
 
         VillageSnapshot previous = null;
@@ -91,7 +96,7 @@ public final class ReportApplication {
             List<ValidationIssue> previousIssues = snapshotValidator.validate(loadedPrevious.raw());
             issues.addAll(previousIssues);
             if (hasErrors(previousIssues)) {
-                return failed("Previous snapshot is structurally invalid; no diff was generated", issues);
+                return analysisFailed("Previous snapshot is structurally invalid; no diff was produced", issues);
             }
             previous = snapshotNormalizer.normalize(loadedPrevious);
             diff = diffService.compare(previous, incoming);
@@ -101,14 +106,29 @@ public final class ReportApplication {
         issues.addAll(reconciliation.issues());
         VillageSnapshot reconciled = reconciliation.snapshot();
         if (hasErrors(issues)) {
-            return failed("Reconciliation produced a structural conflict; no report was generated", issues);
+            return analysisFailed("Reconciliation produced a structural conflict; no analysis was produced", issues);
         }
 
         CalculationResult calculation = calculationEngine.calculate(
                 reconciled, catalog, request.goldPassBoost(), issues);
         ExecutionStatus status = status(issues, calculation.durations().exactTotalAvailable());
-        ReportModel reportModel = new ReportModel(reconciled, catalog, calculation, issues, diff,
-                request.goldPassBoost());
+        String message = status == ExecutionStatus.SUCCESS
+                ? "Offline analysis produced successfully"
+                : "Offline analysis produced with documented pending validation";
+        return new VillageAnalysis(status, message, reconciled, catalog, calculation, diff,
+                request.goldPassBoost(), issues);
+    }
+
+    public ReportExecutionResult generate(ReportRequest request) throws InputDataException, IOException {
+        VillageAnalysis analysis = analyze(request);
+        if (analysis.failed()) {
+            return failed(analysis.message(), analysis.issues());
+        }
+
+        List<ValidationIssue> issues = new ArrayList<>(analysis.issues());
+        ExecutionStatus status = analysis.status();
+        ReportModel reportModel = new ReportModel(analysis.snapshot(), analysis.catalog(),
+                analysis.calculation(), issues, analysis.diff(), request.goldPassBoost());
 
         Path output = request.outputDirectory().toAbsolutePath().normalize();
         Files.createDirectories(output);
@@ -120,7 +140,11 @@ public final class ReportApplication {
         String message = status == ExecutionStatus.SUCCESS
                 ? "Offline report generated successfully"
                 : "Offline report generated with documented pending validation";
-        return new ReportExecutionResult(status, message, issues, calculation, validation, artifacts);
+        return new ReportExecutionResult(status, message, issues, analysis.calculation(), validation, artifacts);
+    }
+
+    private static VillageAnalysis analysisFailed(String message, List<ValidationIssue> issues) {
+        return new VillageAnalysis(ExecutionStatus.FAILED, message, null, null, null, null, null, issues);
     }
 
     private static ExecutionStatus status(List<ValidationIssue> issues, boolean exactTotalAvailable) {
