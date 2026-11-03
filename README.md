@@ -6,15 +6,34 @@
 >
 > **Next sessions (2026-10-21):** the MVP and E1 (complete API response capture) are implemented and locally verified. See the [evolution roadmap](.kiro/specs/clash-village-sync/next-steps.md); local PostgreSQL is the next stage. Period comparisons and a frontend remain planned.
 
-## Estado executável atual / Current executable status (2026-10-21)
+## Estado executável atual / Current executable status (2026-11-03)
 
-O projeto já possui um MVP Java 17/Maven executável. O Maven Wrapper fixa Maven 3.9.9, portanto não é necessário ter `mvn` instalado globalmente:
+O projeto é agora uma **aplicação web full-stack**: um backend Java 17/Maven (CLI offline + API REST Spring Boot somente leitura) e um frontend Angular 21 que consome a API e exibe o dashboard da vila com dados reais do snapshot histórico. O Excel deixou de ser a interface principal e permanece como recurso complementar de relatório. O Maven Wrapper fixa a distribuição, portanto não é necessário ter `mvn` instalado globalmente.
+
+The project is now a **full-stack web application**: a Java 17/Maven backend (offline CLI + a read-only Spring Boot REST API) and an Angular 21 frontend that consumes the API and renders the village dashboard from the historical snapshot. Excel is no longer the primary interface and remains a complementary reporting feature.
 
 ```powershell
-.\mvnw.cmd clean verify
+# Backend — build e testes (49 testes) / build and tests (49 tests)
+.\mvnw.cmd -s ci-settings.xml clean verify
+
+# CLI offline (inalterada) / offline CLI (unchanged)
 java -jar target\clash-village-tracker.jar report --snapshot data\snapshot_2026-10-19.json --catalog data\upgrade_steps.json --gold-pass-boost 0.20 --output output --offline
 java -jar target\clash-village-tracker.jar validate-catalog --catalog data\upgrade_steps.json
+
+# API REST de leitura (porta 8080) / read-only REST API (port 8080)
+.\mvnw.cmd -s ci-settings.xml spring-boot:run
+# ou / or:  java -jar target\clash-village-tracker-web.jar
+# Endpoints: GET /api/health, /api/village/dashboard, /api/village/snapshot, /api/village/categories, /api/village/upgrades
 ```
+
+Frontend (repositório separado `clash-village-tracker-frontend`, Angular 21 + Node 22.12.0):
+
+```powershell
+npm install --legacy-peer-deps   # primeira vez / first time
+npm start                        # http://localhost:4200 (consome a API em http://localhost:8080)
+```
+
+> **Build offline:** `ci-settings.xml` resolve dependências diretamente do Maven Central e contorna o espelho corporativo (`maven.senior.com.br`) quando ele está indisponível, sem alterar o `~/.m2/settings.xml` global. / `ci-settings.xml` resolves dependencies straight from Maven Central, bypassing the corporate mirror when it is unreachable, without touching the global settings.
 
 A coleta isolada do perfil oficial também está implementada. Ela é online somente quando chamada explicitamente e exige o token no processo atual:
 

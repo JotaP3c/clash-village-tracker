@@ -35,3 +35,50 @@ Token por `CLASH_API_TOKEN`, IP whitelist conforme a política atual, timeout e 
 
 ## Dúvidas antes do parser
 Formato real da exportação, IDs, atualização das Sobrecargas, se upgrades ativos incluem `endTime` ou duração restante, e se o perfil da API traz os pets e guardiões no momento. Registre evidência real antes de anunciar cobertura total.
+
+## API de leitura do dashboard (E5) — PT-BR
+
+A partir de 2026-11-03 o backend expõe uma **API REST somente leitura** (Spring Boot 3.3.5 sobre Java 17) que serve a análise offline do snapshot histórico para o frontend Angular. Essa API **não** acessa a API oficial da Supercell, não usa banco de dados e não exige token para iniciar. Ela reutiliza o caso de uso existente `ReportApplication.analyze(...)`, que executa o mesmo pipeline do relatório (carregar → validar → normalizar → reconciliar → calcular) **sem gravar o Excel nem o histórico**; nenhuma regra de negócio foi reescrita.
+
+Classe principal: `com.clashtracker.web.WebApplication` (empacotada separadamente como `clash-village-tracker-web.jar`). A CLI e o `clash-village-tracker.jar` continuam intactos e enxutos (o fat-jar da CLI não contém o Spring).
+
+Configuração externa (`application.properties` ou variáveis de ambiente):
+
+- `tracker.snapshot-path` (padrão `data/snapshot_2026-10-19.json`)
+- `tracker.catalog-path` (padrão `data/upgrade_steps.json`)
+- `tracker.previous-snapshot-path` (opcional, habilita o diff)
+- `tracker.gold-pass-boost` (padrão `0.20`)
+- `server.port` (padrão `8080`)
+
+Endpoints (todos `GET`, prefixo `/api`):
+
+| Rota | Conteúdo |
+|---|---|
+| `/api/health` | Status do backend (`UP`, modo `offline-historical`). |
+| `/api/village/dashboard` | Resumo: vila, progresso geral/permanente/Sobrecargas, durações, construtores, progresso por categoria e qualidade dos dados. |
+| `/api/village/snapshot` | Snapshot normalizado: entidades com nível concluído, máximo, `countAtMax` e Sobrecargas por entidade. |
+| `/api/village/categories` | Progresso por categoria com as entidades de cada categoria. |
+| `/api/village/upgrades` | Etapas pendentes (permanentes e Sobrecargas) com contagem, fila, duração base/com Passe e saldo observado. |
+
+CORS liberado apenas para `http://localhost:4200` e `http://127.0.0.1:4200` durante o desenvolvimento. O progresso é uma métrica de etapas catalogadas, não a porcentagem oficial da Supercell; `fullCertified` permanece `false` enquanto o catálogo for `legacy-unversioned`/incompleto.
+
+Execução local:
+
+```powershell
+# Servidor web (porta 8080)
+.\mvnw.cmd -s ci-settings.xml spring-boot:run
+# ou, após empacotar:
+java -jar target\clash-village-tracker-web.jar
+```
+
+> **Nota de build:** o arquivo `ci-settings.xml` resolve dependências diretamente do Maven Central. Ele existe porque o `~/.m2/settings.xml` da máquina de desenvolvimento aponta para um Artifactory corporativo que nem sempre está acessível. Use-o com `-s ci-settings.xml` quando o espelho corporativo estiver indisponível; ele não altera a configuração global.
+
+## Read-only dashboard API (E5) — EN
+
+Since 2026-11-03 the backend exposes a **read-only REST API** (Spring Boot 3.3.5 on Java 17) that serves the offline analysis of the historical snapshot to the Angular frontend. This API does **not** call the official Supercell API, uses no database, and needs no token to start. It reuses the existing `ReportApplication.analyze(...)` use case, which runs the same pipeline as the report (load → validate → normalize → reconcile → calculate) **without writing the Excel workbook or history**; no business rule was rewritten.
+
+Main class: `com.clashtracker.web.WebApplication` (packaged separately as `clash-village-tracker-web.jar`). The CLI and `clash-village-tracker.jar` stay intact and lean (the CLI fat-jar does not bundle Spring).
+
+External configuration (`application.properties` or environment variables): `tracker.snapshot-path`, `tracker.catalog-path`, `tracker.previous-snapshot-path` (optional, enables diff), `tracker.gold-pass-boost` (default `0.20`), `server.port` (default `8080`).
+
+Endpoints (all `GET`, prefix `/api`): `/api/health`, `/api/village/dashboard`, `/api/village/snapshot`, `/api/village/categories`, `/api/village/upgrades`. CORS is restricted to the Angular dev server during development. Progress is a cataloged step-count metric, not an official Supercell percentage; `fullCertified` stays `false` while the catalog is `legacy-unversioned`/incomplete.
