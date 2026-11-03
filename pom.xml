@@ -18,7 +18,23 @@
         <poi.version>5.3.0</poi.version>
         <slf4j.version>2.0.16</slf4j.version>
         <junit.version>5.11.0</junit.version>
+        <spring-boot.version>3.3.5</spring-boot.version>
+        <!-- Keep the JUnit stack the project already has cached; the Spring Boot BOM would
+             otherwise downgrade junit-platform to 1.10.5, which is not available offline. -->
+        <junit-jupiter.version>5.11.0</junit-jupiter.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -40,6 +56,17 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <!-- Keep the existing slf4j-simple binding; avoid pulling logback as a second one. -->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -64,6 +91,12 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.11.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -84,6 +117,24 @@
                 <configuration>
                     <useModulePath>false</useModulePath>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <mainClass>com.clashtracker.web.WebApplication</mainClass>
+                    <!-- Produce a separate runnable web jar so the CLI shade jar stays primary. -->
+                    <classifier>web</classifier>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>repackage-web</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -111,6 +162,21 @@
                                     </excludes>
                                 </filter>
                             </filters>
+                            <!-- The CLI uber-jar stays lean: it must not bundle the web stack.
+                                 Spring/Tomcat are needed only by the separate web jar produced by
+                                 the spring-boot-maven-plugin. -->
+                            <artifactSet>
+                                <excludes>
+                                    <exclude>org.springframework.boot:*</exclude>
+                                    <exclude>org.springframework:*</exclude>
+                                    <exclude>org.apache.tomcat.embed:*</exclude>
+                                    <exclude>io.micrometer:*</exclude>
+                                    <exclude>jakarta.annotation:*</exclude>
+                                    <exclude>org.yaml:snakeyaml</exclude>
+                                    <exclude>com.fasterxml.jackson.datatype:jackson-datatype-jdk8</exclude>
+                                    <exclude>com.fasterxml.jackson.module:jackson-module-parameter-names</exclude>
+                                </excludes>
+                            </artifactSet>
                         </configuration>
                     </execution>
                 </executions>
