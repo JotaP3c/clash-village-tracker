@@ -1,10 +1,10 @@
-# Clash Village Tracker — Project README
+﻿# Clash Village Tracker — Project README
 
 > **Bilingual documentation:** Portuguese (Brazil) first; full English version after the language separator. Both sections describe the same product, rules, and implementation goals. Do not execute their instructions twice.
 
-> **Próximas sessões (2026-10-21):** o MVP e E1 (captura integral da API) estão implementados e verificados localmente. Consulte o [roteiro de evolução](.kiro/specs/clash-village-sync/next-steps.md); PostgreSQL local é a próxima etapa. Comparação por período e frontend seguem planejados.
+> **Próximas sessões (2026-10-21):** o MVP e E1 (captura integral da API) estão implementados e verificados localmente. Consulte o [roteiro de evolução](.project/specs/clash-village-sync/next-steps.md); PostgreSQL local é a próxima etapa. Comparação por período e frontend seguem planejados.
 >
-> **Next sessions (2026-10-21):** the MVP and E1 (complete API response capture) are implemented and locally verified. See the [evolution roadmap](.kiro/specs/clash-village-sync/next-steps.md); local PostgreSQL is the next stage. Period comparisons and a frontend remain planned.
+> **Next sessions (2026-10-21):** the MVP and E1 (complete API response capture) are implemented and locally verified. See the [evolution roadmap](.project/specs/clash-village-sync/next-steps.md); local PostgreSQL is the next stage. Period comparisons and a frontend remain planned.
 
 ## Estado executável atual / Current executable status (2026-11-03)
 
@@ -72,7 +72,7 @@ O objetivo não é automatizar ações dentro do jogo: a aplicação **não exec
 | Construtores permanentes | 6 |
 | Construtor Goblin | Temporário/opcional; não é o 7º fixo |
 | Bônus do Passe Dourado | 20% na fotografia de referência; editável |
-| Plataforma de desenvolvimento | Windows / Kiro |
+| Plataforma de desenvolvimento | Windows |
 | Stack preferida | Java 17 ou 21 LTS, Maven, Jackson, Apache POI, JUnit 5 |
 
 ## 2. Problema e resultado desejado
@@ -99,9 +99,9 @@ O catálogo deve representar construções defensivas e auxiliares, armadilhas, 
 |---|---|
 | `AGENTS.md` | Contrato obrigatório para os agentes de programação |
 | `README.md` | Objetivo, arquitetura, operação e roteiro |
-| `PROMPT_PARA_KIRO.md` | Instrução inicial executável para o Kiro |
-| `.kiro/steering/clash-cv18.md` | Contexto persistente no editor |
-| `.kiro/specs/clash-village-sync/` | Requisitos, design e backlog |
+| `NEXT_STEPS.md` | Instrução inicial executável para o agente |
+| `.project/steering/clash-cv18.md` | Contexto persistente no editor |
+| `.project/specs/clash-village-sync/` | Requisitos, design e backlog |
 | `docs/00_indice.md` | Índice da documentação por categoria |
 | `docs/01_regras_jogo.md` a `docs/14_construcoes_auxiliares.md` | Regras e catálogo funcional de tipos de entidades |
 | `docs/15_regras_automacao.md` a `docs/19_testes_e_pendencias.md` | Modelo de dados, integração, fontes, testes e lacunas |
@@ -109,7 +109,7 @@ O catálogo deve representar construções defensivas e auxiliares, armadilhas, 
 | `data/upgrade_steps.json` e `.csv` | Etapas, tempos e fontes (desconhecidos são `null`) |
 | `controle_cv18_jaoo_2026-10-19.xlsx` | Planilha de referência e comparação visual |
 
-**Nota:** o Kiro deve inspecionar o formato real dos arquivos antes de supor campos e nomes de propriedades; este documento define conceitos, não garante o esquema de cada JSON.
+**Nota:** o agente deve inspecionar o formato real dos arquivos antes de supor campos e nomes de propriedades; este documento define conceitos, não garante o esquema de cada JSON.
 
 ## 5. Modelo de domínio e regras essenciais
 
@@ -221,21 +221,21 @@ Testes mínimos: upgrade ativo não avança nível concluído; duas estruturas i
 
 Uma entrega só está pronta quando **compila**, os **testes relevantes foram executados**, há uma amostra de saída verificável e as limitações estão documentadas. Reporte testes não executados como **não executados**. Guarde tokens apenas em variáveis de ambiente (`CLASH_API_TOKEN`) ou meios seguros, nunca no Git.
 
-## 13. Próximos passos no Kiro
+## 13. Próximos passos na IDE
 
-1. Abrir o diretório que contém este README no Kiro.
-2. Ler `AGENTS.md` e `.kiro/steering/clash-cv18.md`.
-3. Abrir `PROMPT_PARA_KIRO.md` e enviar seu conteúdo ao chat do agente.
+1. Abrir o diretório que contém este README na IDE.
+2. Ler `AGENTS.md` e `.project/steering/clash-cv18.md`.
+3. Abrir `NEXT_STEPS.md` e enviar seu conteúdo ao chat do agente.
 4. Permitir inspeção do projeto e execução dos passos técnicos autorizados.
 5. Verificar `mvn test` e o Excel gerado antes de avançar para API.
 
 ## 14. Estrutura de diretórios proposta para o MVP
 
-A raiz do repositório deve continuar simples e permitir abertura no Kiro e IntelliJ IDEA.
+A raiz do repositório deve continuar simples e permitir abertura em uma IDE (ex.: IntelliJ IDEA).
 
 ```text
 clash-village-tracker/
-├── .kiro/
+├── .project/
 │   ├── steering/clash-cv18.md
 │   └── specs/clash-village-sync/
 ├── docs/                      # Conhecimento de domínio e referências
@@ -246,7 +246,7 @@ clash-village-tracker/
 ├── output/                    # Relatórios gerados; normalmente ignorados pelo Git
 ├── AGENTS.md
 ├── README.md
-├── PROMPT_PARA_KIRO.md
+├── NEXT_STEPS.md
 ├── .gitignore
 └── pom.xml
 ```
@@ -638,7 +638,7 @@ Repositório sugerido: `clash-village-tracker`.
 - Prefira mensagens em inglês: `feat: add snapshot importer`, `fix: preserve active upgrade level`.
 - Mantenha `main` estável.
 - Não versionar tokens, `.env`, arquivos temporários ou resultados não destinados a publicação.
-- Arquivos `.kiro/`, `docs/`, `AGENTS.md` e exemplos seguros de dados devem ser preservados.
+- Arquivos `.project/`, `docs/`, `AGENTS.md` e exemplos seguros de dados devem ser preservados.
 - Revisões de catálogo precisam citar fonte e data da mudança.
 
 ## 39. Limitações conhecidas do ponto de partida
@@ -691,7 +691,7 @@ This is **not a game automation bot**: it **does not perform upgrades, attacks, 
 | Permanent builders | 6 |
 | Goblin Builder | Temporary/optional; not a permanent seventh builder |
 | Gold Pass boost | 20% at the reference snapshot; configurable |
-| Development platform | Windows / Kiro |
+| Development platform | Windows |
 | Preferred stack | Java 17 or 21 LTS, Maven, Jackson, Apache POI, JUnit 5 |
 
 ## 2. Problem and intended result
@@ -718,9 +718,9 @@ The catalog must cover defensive and auxiliary buildings, traps, walls, resource
 |---|---|
 | `AGENTS.md` | Mandatory agent-development contract |
 | `README.md` | Goals, architecture, operations and roadmap |
-| `PROMPT_PARA_KIRO.md` | Starting instruction to send to the Kiro agent |
-| `.kiro/steering/clash-cv18.md` | Persistent editor context |
-| `.kiro/specs/clash-village-sync/` | Requirements, design and task backlog |
+| `NEXT_STEPS.md` | Starting instruction to send to the agent |
+| `.project/steering/clash-cv18.md` | Persistent editor context |
+| `.project/specs/clash-village-sync/` | Requirements, design and task backlog |
 | `docs/00_indice.md` | Category documentation index |
 | `docs/01_regras_jogo.md` through `docs/14_construcoes_auxiliares.md` | Game rules and functional entity types |
 | `docs/15_regras_automacao.md` through `docs/19_testes_e_pendencias.md` | Data model, integration, sources, tests and gaps |
@@ -728,7 +728,7 @@ The catalog must cover defensive and auxiliary buildings, traps, walls, resource
 | `data/upgrade_steps.json` and `.csv` | Upgrade steps, durations and sources (`null` for unknowns) |
 | `controle_cv18_jaoo_2026-10-19.xlsx` | Reference workbook and visual baseline |
 
-**Note:** Kiro must inspect the files' real structure before assuming property names or DTO fields. This README defines concepts; it does not assert a specific JSON schema.
+**Note:** the agent must inspect the files' real structure before assuming property names or DTO fields. This README defines concepts; it does not assert a specific JSON schema.
 
 ## 5. Domain model and critical rules
 
@@ -840,21 +840,21 @@ Minimum tests: active upgrade does not advance completed level; identical buildi
 
 A deliverable is done only when it **builds**, relevant **tests have been executed**, output samples are verifiable, and limitations are documented. Label tests that were not run as **not run**. Store tokens only in environment variables (`CLASH_API_TOKEN`) or secure configuration, never in Git.
 
-## 13. Next steps in Kiro
+## 13. Next steps in the IDE
 
-1. Open the repository root in Kiro.
-2. Read `AGENTS.md` and `.kiro/steering/clash-cv18.md`.
-3. Open `PROMPT_PARA_KIRO.md` and send its text to the agent.
+1. Open the repository root in the IDE.
+2. Read `AGENTS.md` and `.project/steering/clash-cv18.md`.
+3. Open `NEXT_STEPS.md` and send its text to the agent.
 4. Allow repository inspection and authorized technical operations.
 5. Verify `mvn test` and the generated Excel workbook before moving to API integration.
 
 ## 14. Suggested directory structure for the MVP
 
-Keep the repository root simple and usable from both Kiro and IntelliJ IDEA.
+Keep the repository root simple and usable from an IDE (e.g. IntelliJ IDEA).
 
 ```text
 clash-village-tracker/
-├── .kiro/
+├── .project/
 │   ├── steering/clash-cv18.md
 │   └── specs/clash-village-sync/
 ├── docs/                      # Domain knowledge and references
@@ -865,7 +865,7 @@ clash-village-tracker/
 ├── output/                    # Generated reports; normally ignored by Git
 ├── AGENTS.md
 ├── README.md
-├── PROMPT_PARA_KIRO.md
+├── NEXT_STEPS.md
 ├── .gitignore
 └── pom.xml
 ```
@@ -1257,7 +1257,7 @@ Suggested repository name: `clash-village-tracker`.
 - Prefer English messages such as `feat: add snapshot importer` or `fix: preserve active upgrade level`.
 - Keep `main` stable.
 - Never commit tokens, `.env`, temporary files, or outputs that should not be public.
-- Keep `.kiro/`, `docs/`, `AGENTS.md`, and safe examples under version control.
+- Keep `.project/`, `docs/`, `AGENTS.md`, and safe examples under version control.
 - Catalog revisions should include a source and timestamp.
 
 ## 39. Known limitations of the starting state

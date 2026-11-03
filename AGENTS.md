@@ -1,4 +1,4 @@
-# AGENTS.md — Clash Village Tracker
+﻿# AGENTS.md — Clash Village Tracker
 
 > **Languages / Idiomas:** Português (Brasil) primeiro; English version below. As duas versões descrevem as mesmas regras. O agente deve seguir as regras, não executar duas vezes as mesmas etapas.
 
@@ -14,9 +14,9 @@ Você atua como engenheiro de software Java responsável pelo **Clash Village Tr
 
 Antes de modificar código:
 
-1. Inspecione o repositório e leia `README.md`, `AGENTS.md` e `.kiro/steering/clash-cv18.md`.
+1. Inspecione o repositório e leia `README.md`, `AGENTS.md` e `.project/steering/clash-cv18.md`.
 2. Leia `docs/00_indice.md`, `docs/01_regras_jogo.md`, `docs/15_regras_automacao.md`, `docs/16_modelo_dados.md`, `docs/17_api_e_exportacao.md`, `docs/18_fontes.md` e `docs/19_testes_e_pendencias.md`.
-3. Consulte os arquivos específicos de `docs/` relativos à funcionalidade e os requisitos/design/tarefas em `.kiro/specs/clash-village-sync/`.
+3. Consulte os arquivos específicos de `docs/` relativos à funcionalidade e os requisitos/design/tarefas em `.project/specs/clash-village-sync/`.
 4. Leia `data/snapshot_2026-10-19.json`, `data/upgrade_steps.json` e `data/upgrade_steps.csv`, verificando campos reais antes de escrever DTOs.
 5. Identifique implementação existente, dependências, testes, divergências e pendências. Não recrie algo que já existe sem necessidade.
 
@@ -26,7 +26,7 @@ Antes de modificar código:
 
 - Desenvolva incrementalmente, com autonomia para leitura, edições não destrutivas, compilação e testes permitidos pelo ambiente.
 - Não peça confirmação a cada arquivo ou comando comum. Peça aprovação para exclusão relevante, perda de dados, publicação, ação externa permanente ou mudança de arquitetura de alto impacto.
-- Não burle permissões do Kiro, Git, sistema operacional ou serviços externos.
+- Não burle permissões do the IDE, Git, sistema operacional ou serviços externos.
 - Evite discussões repetitivas de planejamento; após inspeção suficiente, entregue código executável e testes.
 - Não invente recursos de endpoints, níveis máximos, durações, custos, propriedades JSON ou dados do jogador.
 - Produza respostas finais com implementações, arquivos alterados, comandos executados, testes (aprovados/falhos/não executados), limitações e próximos passos.
@@ -272,7 +272,7 @@ Cada catálogo deve identificar versão, data de revisão, fontes e escopo (por 
 - Links são referências, não substitutos de validação. Registre data de consulta e, quando possível, revisão da página.
 - Se uma atualização tornar a versão anterior incompatível, gere diagnóstico e peça reconciliação de catálogo.
 
-O Kiro deve verificar se os JSON/CSV existentes respeitam esse contrato antes de depender deles.
+O agente deve verificar se os JSON/CSV existentes respeitam esse contrato antes de depender deles.
 
 ## 23. Política de API e exportação oficial
 
@@ -363,7 +363,7 @@ O repositório pode ser público no futuro, portanto não comite dados sensívei
 - Não use `git push --force` sem solicitação explícita e justificativa.
 - Não remova trabalhos locais do usuário ao reorganizar o projeto.
 - Não modifique branches remotas ou permissões do repositório sem aprovação.
-- Não tente contornar solicitações de autorização do Kiro.
+- Não tente contornar solicitações de autorização da ferramenta/IDE.
 - Não afirme que executou integração, teste ou publicação quando apenas a documentou.
 
 ## 29. Critérios de aceite do MVP
@@ -427,9 +427,9 @@ You are the Java software engineer responsible for **Clash Village Tracker**, a 
 
 Before changing code:
 
-1. Inspect the repository; read `README.md`, `AGENTS.md`, and `.kiro/steering/clash-cv18.md`.
+1. Inspect the repository; read `README.md`, `AGENTS.md`, and `.project/steering/clash-cv18.md`.
 2. Read `docs/00_indice.md`, `docs/01_regras_jogo.md`, `docs/15_regras_automacao.md`, `docs/16_modelo_dados.md`, `docs/17_api_e_exportacao.md`, `docs/18_fontes.md`, and `docs/19_testes_e_pendencias.md`.
-3. Read the relevant category documents under `docs/` and the requirements/design/tasks under `.kiro/specs/clash-village-sync/`.
+3. Read the relevant category documents under `docs/` and the requirements/design/tasks under `.project/specs/clash-village-sync/`.
 4. Inspect the **actual fields** in `data/snapshot_2026-10-19.json`, `data/upgrade_steps.json`, and `data/upgrade_steps.csv` before designing DTOs.
 5. Identify existing implementation, dependencies, tests, discrepancies, and missing information. Avoid unnecessary rewrites.
 
@@ -439,7 +439,7 @@ Before changing code:
 
 - Work incrementally and autonomously for permitted reading, non-destructive changes, builds, and tests.
 - Do not request approval for every ordinary file or command. Seek approval for material deletion, data loss, publishing, persistent external actions, or major architecture changes.
-- Do not bypass Kiro, Git, operating-system, or service permissions.
+- Do not bypass the IDE, Git, operating-system, or service permissions.
 - Avoid endless planning loops. After sufficient inspection, deliver working code with tests.
 - Never invent endpoint capabilities, maximum levels, durations, costs, JSON properties, or account state.
 - End tasks with implemented behavior, changed files, executed commands, test results (pass/fail/not run), limitations, and next steps.
@@ -685,7 +685,7 @@ Every catalog identifies its version, review timestamp, sources, and scope (for 
 - Links are references, not proof of verification. Record consultation date and, when possible, source revision.
 - If a patch renders an old version incompatible, raise a diagnostic and require catalog reconciliation.
 
-The Kiro agent must validate the existing JSON/CSV against this contract before relying on it.
+The agent must validate the existing JSON/CSV against this contract before relying on it.
 
 ## 23. Official API and game-export policy
 
@@ -776,7 +776,7 @@ The repository may become public, so do not commit sensitive information.
 - Never use `git push --force` without explicit request and justification.
 - Do not delete existing local user work while reorganizing the repository.
 - Do not change remote branches or access permissions without approval.
-- Do not bypass Kiro's permission controls.
+- Do not bypass the IDE's permission controls.
 - Never claim an integration, test, or publication was executed when only documented.
 
 ## 29. MVP acceptance criteria

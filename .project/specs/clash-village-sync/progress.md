@@ -1,4 +1,4 @@
-# Checkpoint de desenvolvimento
+﻿# Checkpoint de desenvolvimento
 
 Data: 2026-10-21 (ver também o checkpoint 2026-11-03 abaixo)
 
@@ -76,7 +76,7 @@ Mudança de direção do produto: o foco deixou de ser o Excel e passou a ser um
 - O usuário quer histórico no PostgreSQL para consultas e gráficos por intervalo de datas. A recomendação é Angular por ser a tecnologia que já conhece; Spring Boot servirá como API Java de leitura entre a interface e o banco; Flyway cuidará das migrações versionadas.
 - O usuário criou o repositório separado `C:\Kiro\clash-village-tracker-frontend`. A fundação será Angular 21 com Node 22.12.0; a camada `persistence` do backend continuará com contratos e adaptadores/repositórios Java para PostgreSQL.
 - F0 (fundação Angular sem dados reais) pode iniciar em paralelo a E2. E3 domínio/reconciliação, E4 período/Excel, E5 API e E6 Angular com dados reais permanecem planejadas. Nenhum banco foi conectado/criado neste checkpoint.
-- O prompt operacional atual em `PROMPT_PROXIMOS_PASSOS_KIRO.md` executa somente E2 e exige alvo local dedicado `clash_village_tracker_dev`; se configuração/acesso não estiverem disponíveis, não conecta a outros bancos e relata essa pendência.
+- O prompt operacional atual em `NEXT_STEPS.md` executa somente E2 e exige alvo local dedicado `clash_village_tracker_dev`; se configuração/acesso não estiverem disponíveis, não conecta a outros bancos e relata essa pendência.
 - O usuário solicitou commit local do estado atual na branch `develop` antes de iniciar E2 ou qualquer frontend. A entrega E1 e o checkpoint foram incluídos no commit `068b53a`; o push foi feito pelo usuário antes da fundação F0.
 
 ## F0 — fundação Angular separada — 2026-10-21
@@ -136,7 +136,7 @@ E2: PostgreSQL dedicado `clash_village_tracker_dev`, configuração externa, mig
 
 ## Roteiro anterior registrado em 2026-10-20 (histórico)
 
-Roteiro operacional: [next-steps.md](next-steps.md). Prompt: [PROMPT_PROXIMOS_PASSOS_KIRO.md](../../../PROMPT_PROXIMOS_PASSOS_KIRO.md).
+Roteiro operacional: [next-steps.md](next-steps.md). Prompt: [NEXT_STEPS.md](../../../NEXT_STEPS.md).
 
 1. E1: preservar resposta integral e metadados da API, reaproveitando `fetch-player` (concluída em 2026-10-21; ver entrega acima).
 2. E2: implementar PostgreSQL local, configuração, migrações e repositórios; DBeaver para inspeção.
@@ -148,12 +148,12 @@ Exportação nativa continua pendente de amostra real, sem bloquear a coleta de 
 
 ## Recuperação após exclusão acidental — 2026-10-20
 
-- Restaurados a partir do histórico local do Kiro: `FetchPlayerProfileApplication.java`, `CatalogImporter.java` e `VillageEntity.java`.
+- Restaurados a partir do histórico local da IDE: `FetchPlayerProfileApplication.java`, `CatalogImporter.java` e `VillageEntity.java`.
 - Inventário Maven confirmado: 64/64 fontes de produção presentes e 9/9 fontes de teste presentes.
 - Build limpo recompôs `target/clash-village-tracker.jar`; 8 suítes, 38 testes, 0 falhas, 0 erros e 0 ignorados.
 - IntelliJ alinhado localmente ao SDK registrado `ms-17`, language level 17 e recarga Maven automática.
-- Kiro configurado para JavaSE-17, importação Maven automática e Maven Wrapper.
-- O log do Kiro registrou conflito de bundle ASM entre `redhat.java 1.58.0` e `vscode-java-test 0.47.0`; foi selecionado `vscode-java-test 0.45.0`, sem o bundle duplicado. O cache JDT/OSGi corrompido foi copiado para pastas `*.backup-*` e esvaziado. É necessário recarregar a janela do Kiro uma vez para iniciar o novo servidor Java.
+- IDE configurada para JavaSE-17, importação Maven automática e Maven Wrapper.
+- O log do agente registrou conflito de bundle ASM entre `redhat.java 1.58.0` e `vscode-java-test 0.47.0`; foi selecionado `vscode-java-test 0.45.0`, sem o bundle duplicado. O cache JDT/OSGi corrompido foi copiado para pastas `*.backup-*` e esvaziado. É necessário recarregar a janela do agente uma vez para iniciar o novo servidor Java.
 
 ## Planejamento atualizado — 2026-10-20
 

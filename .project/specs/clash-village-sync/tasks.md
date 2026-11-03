@@ -1,4 +1,4 @@
-# Backlog de implementação para Kiro
+# Backlog de implementação
 
 Atualizado em 2026-10-21. `[x]` representa implementação existente com os limites documentados; não certifica aceite integral do produto. Ordem e detalhes: [next-steps.md](next-steps.md).
 

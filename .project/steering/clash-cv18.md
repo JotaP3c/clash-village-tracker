@@ -1,4 +1,4 @@
----
+﻿---
 inclusion: always
 ---
 # Contexto persistente do projeto — Clash of Clans CV18
@@ -16,7 +16,7 @@ Antes de planejar, modificar ou implementar qualquer rotina:
 7. Planeje o gerador de Excel para manter o Dashboard e o gráfico atualizáveis pelas fórmulas da aba Controle Geral.
 8. Registre fonte, versão e confiança por campo; não marque a vila 100% FULL enquanto existirem lacunas.
 
-O fluxo de implementação encontra-se em `.kiro/specs/clash-village-sync/`.
+O fluxo de implementação encontra-se em `.project/specs/clash-village-sync/`.
 
 ## Direção atual — 2026-11-03 (aplicação web full-stack)
 
@@ -24,4 +24,4 @@ O produto é agora uma **aplicação web full-stack**. Já existem e estão veri
 
 Persistência **E2 implementada em SQL Server** (não PostgreSQL): o usuário tem SQL Server 2019 Express local. Banco dedicado `clash_village_tracker_dev`, login SQL `clash_app` (senha só em `CLASH_DB_PASSWORD`, nunca em arquivo), migrações Flyway (`flyway-sqlserver` + `mssql-jdbc`). A persistência é desligada por padrão (`tracker.db.enabled=false`) e a app sobe sem banco; endpoints `/api/db/*` e `/api/village/official-profile` (Opção A — lê a coleta mais recente do `fetch-player`). Autenticação integrada do driver exige DLL nativa ausente, por isso usa-se autenticação SQL.
 
-Ainda **planejados**: E3 (reconciliação/catálogo versionado) e E4 (comparação por período e evolução temporal no dashboard — depende de uma segunda coleta). Manter o modo offline, nunca inventar snapshots para datas sem coleta e nunca declarar FULL com catálogo incompleto. Para novas sessões, seguir `.kiro/specs/clash-village-sync/next-steps.md` e `progress.md` (checkpoints 2026-11-03), sem recriar o que já existe.
+Ainda **planejados**: E3 (reconciliação/catálogo versionado) e E4 (comparação por período e evolução temporal no dashboard — depende de uma segunda coleta). Manter o modo offline, nunca inventar snapshots para datas sem coleta e nunca declarar FULL com catálogo incompleto. Para novas sessões, seguir `.project/specs/clash-village-sync/next-steps.md` e `progress.md` (checkpoints 2026-11-03), sem recriar o que já existe.

@@ -1,4 +1,4 @@
-# Próximos passos — API, PostgreSQL e evolução por período
+﻿# Próximos passos — API, PostgreSQL e evolução por período
 
 > **Atualização 2026-11-03 — direção full-stack:** a prioridade do produto passou a ser uma aplicação web funcional. As etapas **E5 (API de leitura Spring Boot)** e **E6 (Angular com dados reais)** foram implementadas como um MVP vertical sobre o snapshot histórico, com integração real backend↔frontend verificada (ver `progress.md`, checkpoint 2026-11-03). A persistência **PostgreSQL (E2/E3) e a comparação por período (E4) continuam planejadas** e não são pré-requisito do MVP web; elas habilitarão histórico e evolução por datas quando implementadas. O texto abaixo é o planejamento original de dados, mantido como referência.
 
@@ -20,7 +20,7 @@ Data da decisão original: 2026-10-21. E1 foi implementada e verificada localmen
 
 ## 2. Referências e leitura do agente
 
-Seguir `AGENTS.md`, `README.md`, steering e documentos obrigatórios. Ler `requirements.md`, `design.md`, `tasks.md` e `progress.md` desta pasta antes de implementar. O prompt operacional está em `../../../PROMPT_PROXIMOS_PASSOS_KIRO.md`.
+Seguir `AGENTS.md`, `README.md`, steering e documentos obrigatórios. Ler `requirements.md`, `design.md`, `tasks.md` e `progress.md` desta pasta antes de implementar. O prompt operacional está em `../../../NEXT_STEPS.md`.
 
 O contrato da API foi analisado a partir do texto fornecido pelo usuário nesta sessão. Anexo de referência, quando disponível no ambiente: `C:/Users/joao.correa/.codex/attachments/2ef4efa8-4d92-49f2-8be4-c4316c219e3b/Pasted text.txt`. É uma cópia externa ao repositório, não uma dependência do build; não copiar credenciais nem exigir esse caminho em outra máquina. As conclusões úteis estão registradas em `design.md` e em `docs/17_api_e_exportacao.md`.
 
