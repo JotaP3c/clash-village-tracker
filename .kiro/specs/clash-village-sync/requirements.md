@@ -9,7 +9,7 @@ Executar localmente uma aplicação Java que importe evidências da vila, reconc
 - PostgreSQL é a persistência escolhida para a próxima etapa; DBeaver será usado para administrar e inspecionar os dados. A aplicação se conectará via JDBC.
 - O modo offline JSON/CSV deve continuar funcionando sem banco, token ou internet.
 - O snapshot de 2026-10-19 é histórico. O banco não cria observações de datas anteriores às fontes disponíveis.
-- Recomendação para a interface: Angular, considerando a experiência prévia do usuário; será implementado depois de existir uma API de leitura estável.
+- A fundação da interface será Angular 21, considerando a experiência prévia do usuário, no repositório separado `C:\Kiro\clash-village-tracker-frontend`. O consumo de dados reais só começa após uma API de leitura estável.
 - Recomendação para a API de leitura: Spring Boot em Java, mantendo regras de domínio e CLI offline existentes. Confirmar a integração menos disruptiva com o Maven atual antes de criar módulos ou mover pacotes.
 - O navegador chama somente a API HTTP. Credenciais do PostgreSQL e `CLASH_API_TOKEN` permanecem no backend/processo local e nunca são incluídas no frontend.
 - A ferramenta recomendada para migrações versionadas é Flyway; confirmar compatibilidade e fixar versão na etapa E2.
@@ -41,7 +41,7 @@ Executar localmente uma aplicação Java que importe evidências da vila, reconc
 ## Requisitos técnicos e limites
 
 - Usar Java 17/Maven e os pacotes existentes; acrescentar JDBC/Flyway na etapa PostgreSQL e Spring Boot Web somente na etapa da API.
-- Manter a aplicação Angular em diretório próprio no mesmo repositório, sem compartilhar credenciais ou acessar PostgreSQL diretamente.
+- Manter a aplicação Angular em seu repositório próprio, sem compartilhar credenciais ou acessar PostgreSQL diretamente.
 - Credenciais somente por configuração externa: `CLASH_API_TOKEN`, `CLASH_DB_URL`, `CLASH_DB_USER`, `CLASH_DB_PASSWORD` e schema configurado. Não incluir senhas na URL, arquivos versionados, logs ou relatórios.
 - JSON/CSV históricos e planilha de referência permanecem preservados. Correções geram novas evidências.
 - Não conectar a bancos locais não configurados nem executar DDL automaticamente durante `report` ou `fetch-player`.

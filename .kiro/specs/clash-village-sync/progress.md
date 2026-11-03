@@ -1,14 +1,62 @@
 # Checkpoint de desenvolvimento
 
-Data: 2026-10-21
+Data: 2026-10-21 (ver também o checkpoint 2026-11-03 abaixo)
+
+## Entrega E5 + E6 — aplicação web full-stack — 2026-11-03
+
+Mudança de direção do produto: o foco deixou de ser o Excel e passou a ser uma aplicação web full-stack com integração real backend↔frontend. Foram implementadas, de forma pragmática e verticalmente completa, as etapas E5 (API de leitura) e E6 (Angular com dados reais), sem introduzir PostgreSQL (E2/E3/E4 de persistência permanecem planejadas e não são pré-requisito do MVP web).
+
+### Backend (repositório `clash-village-tracker`, branch `develop`)
+
+- Adicionada camada web Spring Boot 3.3.5 sobre o Java 17/Maven existente, **reaproveitando** `ReportApplication` e `CalculationEngine`; nenhuma regra de domínio foi reescrita nem duplicada.
+- Refatoração não destrutiva: extraído `ReportApplication.analyze(ReportRequest)` que executa o pipeline (load→validate→normalize→reconcile→calculate) **sem gravar Excel/artefatos** e retorna o novo record `VillageAnalysis`. O método `generate(...)` passou a reutilizar `analyze(...)` e manteve exatamente o comportamento anterior (Excel, histórico e persistência inalterados).
+- Novos pacotes: `web` (`WebApplication`), `web.config` (`TrackerProperties`, `TrackerConfiguration` com beans de `ObjectMapper`/`ReportApplication` e CORS para o Angular), `web.dto` (`DashboardResponse`, `SnapshotResponse`, `CategoryResponse`, `UpgradeResponse`), `web.service` (`VillageDashboardService`), `web.controller` (`HealthController`, `VillageController`, `ApiExceptionHandler`).
+- Endpoints `GET`: `/api/health`, `/api/village/dashboard`, `/api/village/snapshot`, `/api/village/categories`, `/api/village/upgrades`. Configuração externa por `tracker.*` (snapshot, catálogo, previous, gold-pass-boost) e `server.port`.
+- `pom.xml`: BOM do Spring Boot em `dependencyManagement`, `spring-boot-starter-web` (excluindo `spring-boot-starter-logging` para manter o binding slf4j-simple), `spring-boot-maven-plugin` com `classifier=web` (gera `clash-village-tracker-web.jar` separado) e `repackage`. O `maven-shade-plugin` passou a **excluir** as dependências web do fat-jar da CLI, que ficou enxuto (22 MB vs. 38 MB do jar web). `junit-jupiter.version` fixado em 5.11.0 para não ser rebaixado pelo BOM.
+- `application.properties` criado em `src/main/resources`.
+- Adicionado `ci-settings.xml`: espelho direto do Maven Central, para contornar o Artifactory corporativo (`maven.senior.com.br`) quando indisponível, sem alterar o `~/.m2/settings.xml` global.
+- Novo teste `VillageDashboardServiceTest` (5 casos) validando identidade da vila (`#U8J89QP2`/TH18/6 construtores), limites de progresso, FULL não certificado com catálogo incompleto, separação Sobrecargas×permanentes, categorias com entidades e Smasher mantendo nível concluído 3.
+
+### Frontend (repositório `clash-village-tracker-frontend`, branch `main`)
+
+- Dashboard conectado à API real (antes era só fundação sem dados). Novos: `core/api/dashboard.models.ts` (tipos espelhando os DTOs), `core/api/dashboard-api.service.ts` (HTTP real via `HttpClient`), `dashboard-page.ts/.html/.scss` reescritos com signals, estados de loading/erro/retry, donut de progresso geral, barras permanente/Sobrecarga, cartões de KPI, navegação por categoria com tabela de entidades e listas de Sobrecargas e melhorias permanentes. Tema visual inspirado em Clash of Clans (badge TH, dourado, roxo para SC), responsivo.
+- `api-configuration.ts`: baseUrl padrão `http://localhost:8080`, sobrescrevível por `window.__CLASH_TRACKER_API__` sem rebuild.
+- `angular.json`: budget de estilo por componente elevado para acomodar o SCSS do dashboard.
+
+### Verificação (executada)
+
+- Backend `.\mvnw.cmd -s ci-settings.xml clean verify`: **BUILD SUCCESS**, **49 testes, 0 falhas, 0 erros** (44 existentes + 5 novos). Empacotamento gera `clash-village-tracker.jar` (CLI) e `clash-village-tracker-web.jar`.
+- CLI de regressão: `validate-catalog` roda e mantém o resultado anterior (215 linhas, 10 durações desconhecidas, PARTIAL_SUCCESS). Modo offline preservado; CLI não contém Spring.
+- Servidor web: Tomcat sobe na porta 8080 (`Started WebApplication in ~5s`). `GET /api/health` → `UP`; `GET /api/village/dashboard` → dados reais (progresso geral 92,79% = 8300/8945 etapas; Sobrecargas 3,7%; cobertura 91,06%; FULL não certificado). 
+- Integração E2E: Angular em `:4200` recebe `Access-Control-Allow-Origin: http://localhost:4200` da API em `:8080` (preflight OPTIONS 200 + GET 200). Build de produção do frontend OK; `npm test` (vitest) **1/1 passou**.
+
+### Limitações conhecidas / próximo passo
+
+- Persistência PostgreSQL, histórico por período e comparação temporal (E2/E3/E4) continuam planejados e não implementados; a API serve apenas o snapshot histórico atual.
+- Não houve integração com a API oficial da Supercell nesta entrega (o comando `fetch-player` segue manual e isolado).
+- `fullCertified` permanece `false` (catálogo `legacy-unversioned`, 10 durações desconhecidas, 309 ocorrências de etapa sem duração).
+- Nenhum commit/push foi feito (aguarda autorização explícita do usuário).
+- Próximo incremento sugerido: persistência (E2) para habilitar histórico, e então expor evolução por período na API e no dashboard (E4/E6 avançado).
+
+---
+
+## Checkpoint anterior — 2026-10-21
 
 ## Planejamento e checkpoint solicitado — 2026-10-21
 
 - O usuário quer histórico no PostgreSQL para consultas e gráficos por intervalo de datas. A recomendação é Angular por ser a tecnologia que já conhece; Spring Boot servirá como API Java de leitura entre a interface e o banco; Flyway cuidará das migrações versionadas.
-- Proposta para o frontend: diretório `frontend/` no mesmo repositório Git. A camada `persistence` terá contratos e adaptadores/repositórios Java para PostgreSQL. Não criar repositório Git separado antes de haver motivo concreto de implantação ou ciclo independente.
-- Próxima implementação é somente E2 (PostgreSQL, migrações e persistência). E3 domínio/reconciliação, E4 período/Excel, E5 API e E6 Angular permanecem planejadas. Nenhum banco foi conectado/criado e nenhuma aplicação web foi iniciada neste checkpoint.
+- O usuário criou o repositório separado `C:\Kiro\clash-village-tracker-frontend`. A fundação será Angular 21 com Node 22.12.0; a camada `persistence` do backend continuará com contratos e adaptadores/repositórios Java para PostgreSQL.
+- F0 (fundação Angular sem dados reais) pode iniciar em paralelo a E2. E3 domínio/reconciliação, E4 período/Excel, E5 API e E6 Angular com dados reais permanecem planejadas. Nenhum banco foi conectado/criado neste checkpoint.
 - O prompt operacional atual em `PROMPT_PROXIMOS_PASSOS_KIRO.md` executa somente E2 e exige alvo local dedicado `clash_village_tracker_dev`; se configuração/acesso não estiverem disponíveis, não conecta a outros bancos e relata essa pendência.
-- O usuário solicitou commit local do estado atual na branch `develop` antes de iniciar E2 ou qualquer frontend. Este checkpoint documental e a entrega E1 abaixo serão incluídos nesse commit; não haverá push.
+- O usuário solicitou commit local do estado atual na branch `develop` antes de iniciar E2 ou qualquer frontend. A entrega E1 e o checkpoint foram incluídos no commit `068b53a`; o push foi feito pelo usuário antes da fundação F0.
+
+## F0 — fundação Angular separada — 2026-10-21
+
+- O usuário criou `C:\Kiro\clash-village-tracker-frontend` como repositório separado. O remoto HTTPS retornava “Repository not found” sem autenticação; a URL foi alinhada à autenticação SSH já usada pelo backend: `git@github-pessoal:JotaP3c/clash-village-tracker-frontend.git`.
+- Criado workspace Angular CLI 21.2.27 com SCSS, Router e Node 22.12.0. O Node 12 instalado na máquina não é compatível com essa versão e não deve ser usado para esse repositório.
+- A rota `/dashboard` contém shell inicial, filtros desabilitados, cartões sem métricas e estado explícito de API/histórico indisponíveis. O serviço HTTP aceita somente uma URL pública via `window.__CLASH_TRACKER_API__`; não há token, senha, chamada HTTP nem dados simulados.
+- Verificação: `npm run build` aprovado; `npm test -- --watch=false` aprovado com 1 teste. A primeira tentativa de `npm test -- --run` falhou porque Angular 21 não reconhece `--run`; foi substituída pelo argumento suportado. A instalação exigiu `npm install --legacy-peer-deps` para contornar uma falha interna do npm 10.9.0 (`edgesOut` nulo).
+- `npm audit` relatou 4 vulnerabilidades altas no conjunto instalado. Nenhuma atualização automática ou com `--force` foi aplicada; avaliar dependências e correção compatível em uma etapa própria.
 
 ## Entrega E1 — captura integral da resposta da API
 

@@ -18,8 +18,8 @@ Antes de planejar, modificar ou implementar qualquer rotina:
 
 O fluxo de implementação encontra-se em `.kiro/specs/clash-village-sync/`.
 
-## Direção atual — 2026-10-20
+## Direção atual — 2026-11-03 (aplicação web full-stack)
 
-O MVP offline e `fetch-player` já existem. Para novas sessões, seguir `.kiro/specs/clash-village-sync/next-steps.md` e `PROMPT_PROXIMOS_PASSOS_KIRO.md`, sem recriar o projeto inicial.
+O produto é agora uma **aplicação web full-stack**. Já existem e estão verificados: o MVP offline (CLI/Excel), `fetch-player` isolado, a **API REST de leitura Spring Boot** (`com.clashtracker.web`, endpoints `/api/health` e `/api/village/*`) e o **dashboard Angular 21** (`clash-village-tracker-frontend`) consumindo essa API com dados reais do snapshot histórico. A API reutiliza `ReportApplication.analyze(...)` e não reescreve regras; o Excel virou recurso complementar. Empacotam-se dois jars: `clash-village-tracker.jar` (CLI, sem Spring) e `clash-village-tracker-web.jar` (servidor). Use `-s ci-settings.xml` no Maven quando o espelho corporativo estiver indisponível.
 
-O usuário escolheu PostgreSQL local, com DBeaver para inspeção, histórico comparável por período e frontend futuro. Próximo incremento: E1, captura integral da API. Banco, consultas temporais e interface são etapas posteriores documentadas, ainda não implementadas. Manter o modo offline e nunca inventar snapshots para datas sem coleta.
+Ainda **planejados** (não implementados): PostgreSQL local (E2/E3), histórico comparável por período e evolução temporal no dashboard (E4). Manter o modo offline, nunca inventar snapshots para datas sem coleta e nunca declarar FULL com catálogo incompleto. Para novas sessões, seguir `.kiro/specs/clash-village-sync/next-steps.md` e `progress.md` (checkpoint 2026-11-03), sem recriar o que já existe.

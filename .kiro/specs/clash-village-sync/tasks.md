@@ -36,6 +36,13 @@ Verificação desta entrega: `.\mvnw.cmd -o verify` e regressão offline registr
 - [ ] E2.7 Executar leitura/escrita de teste em alvo dedicado, provar rollback e documentar consultas de inspeção no DBeaver; se não houver conexão configurada, registrar integração PostgreSQL como não executada.
 - [ ] E2.8 Preservar CLI offline sem banco; migração só por comando/ação explícita e sem alterar outros bancos locais.
 
+## F0 — Fundação Angular separada
+
+- [ ] F0.1 Corrigir o remoto do repositório `clash-village-tracker-frontend` para usar SSH, criar o primeiro commit `main` e publicar o workspace.
+- [x] F0.2 Gerar workspace Angular 21 com Node 22.12.0, SCSS e Router; `npm run build` aprovado em 2026-10-21.
+- [x] F0.3 Criar shell e rota de dashboard com estados explícitos de API/histórico indisponíveis, sem dados fictícios de evolução.
+- [x] F0.4 Preparar serviço HTTP e configuração externa da URL da API, sem token, senha ou dependência direta do PostgreSQL.
+
 ## E3 — Domínio, reconciliação, cálculo e consistência
 
 - [ ] E3.1 Confirmar payload real de itens; implementar DTOs/mapeamento comprovados, aliases versionados e revisão de desconhecidos.
@@ -65,9 +72,9 @@ Verificação desta entrega: `.\mvnw.cmd -o verify` e regressão offline registr
 - [ ] E5.3 Usar DTOs de domínio independentes do Excel; validar limites de data, histórico insuficiente e cobertura parcial.
 - [ ] E5.4 Manter DB e token da Supercell somente no processo servidor; configurar CORS para o frontend local e testar API com PostgreSQL de teste.
 
-## E6 — Frontend Angular
+## E6 — Frontend Angular com dados reais
 
-- [ ] E6.1 Criar aplicação em `frontend/` com Angular, roteamento e serviço HTTP para a API E5.
+- [ ] E6.1 Evoluir a aplicação em `C:\Kiro\clash-village-tracker-frontend` para consumir a API E5.
 - [ ] E6.2 Implementar seleção de jogador/período, resumo de cobertura/pendências e tabela filtrável por categoria/entidade.
 - [ ] E6.3 Mostrar gráficos temporais somente com observações existentes, indicando datas efetivas e intervalos sem baseline.
 - [ ] E6.4 Escolher biblioteca de gráficos compatível com a versão Angular adotada e testar vazio, erro HTTP, carga e filtro.

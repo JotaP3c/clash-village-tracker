@@ -1,6 +1,8 @@
 # Próximos passos — API, PostgreSQL e evolução por período
 
-Data da decisão: 2026-10-21. E1 foi implementada e verificada localmente. PostgreSQL, API de leitura e frontend continuam planejados, não implementados. Recomendação provisória: PostgreSQL + Flyway, API Java com Spring Boot e frontend Angular no mesmo repositório Git.
+> **Atualização 2026-11-03 — direção full-stack:** a prioridade do produto passou a ser uma aplicação web funcional. As etapas **E5 (API de leitura Spring Boot)** e **E6 (Angular com dados reais)** foram implementadas como um MVP vertical sobre o snapshot histórico, com integração real backend↔frontend verificada (ver `progress.md`, checkpoint 2026-11-03). A persistência **PostgreSQL (E2/E3) e a comparação por período (E4) continuam planejadas** e não são pré-requisito do MVP web; elas habilitarão histórico e evolução por datas quando implementadas. O texto abaixo é o planejamento original de dados, mantido como referência.
+
+Data da decisão original: 2026-10-21. E1 foi implementada e verificada localmente.
 
 ## 1. Decisões e ponto de partida
 
@@ -10,7 +12,7 @@ Data da decisão: 2026-10-21. E1 foi implementada e verificada localmente. Postg
 - Nome proposto para o banco de desenvolvimento dedicado: `clash_village_tracker_dev`. Criar/conectar somente quando o alvo e as credenciais estiverem configurados e confirmados; nunca reutilizar outro banco por suposição.
 - Flyway é a ferramenta recomendada para migrações SQL versionadas. DBeaver fica para administração e inspeção, não para guardar credenciais no código.
 - Recomendação de interface: Angular, aproveitando a experiência do usuário. Recomendação de API de leitura: Spring Boot sobre Java 17, reaproveitando o domínio e os casos de uso atuais.
-- No início, manter Angular em `frontend/` no mesmo repositório Git. Criar repositórios Java/adaptadores PostgreSQL em `persistence`; avaliar um repositório Git separado somente quando implantação, acesso ou ciclo de versão forem realmente independentes.
+- O frontend foi separado pelo usuário em `C:\Kiro\clash-village-tracker-frontend`, com remoto próprio. Ele usará Angular 21 e Node 22.12.0, ambos instalados localmente. Criar repositórios Java/adaptadores PostgreSQL em `persistence` no backend.
 - O navegador acessará somente a API HTTP. PostgreSQL e token da Supercell serão acessados apenas pelo processo backend.
 - Snapshot histórico inicial: 2026-10-19, 123 registros em 12 categorias. Nenhuma coleta anterior foi comprovada; uma comparação de 15 dias não estará disponível só com essa fotografia.
 - E1 preserva bytes HTTP, SHA-256, metadados allowlisted e perfil interpretado separado em coletas locais imutáveis; testes locais não consultam a API real.
@@ -27,13 +29,14 @@ O contrato da API foi analisado a partir do texto fornecido pelo usuário nesta 
 | Etapa | Entrega | Dependência para avançar |
 |---|---|---|
 | E1 | Captura integral e auditável do perfil, reaproveitando o comando atual. | Corpo original preservado e testes HTTP locais aprovados. |
+| F0 | Fundação Angular separada: workspace, navegação, tema inicial e contrato de API ainda simulado. | Repositório frontend com `main` e build local aprovado. |
 | E2 | Banco PostgreSQL local dedicado, Flyway, migrações e repositórios Java de evidência/histórico. | Alvo dedicado configurado; idempotência e transações verificadas. |
 | E3 | Mapeamento/reconciliação persistidos e correções de cálculo/Excel. | Dados comprovados, pendências recalculadas e métricas consistentes. |
 | E4 | Comparação por período e Excel de evolução. | Duas observações comparáveis, seleção temporal e fontes rastreáveis. |
-| E5 | API Java/Spring Boot somente leitura para dashboard e histórico. | Casos de uso temporais estáveis e contrato de consulta definido. |
-| E6 | Aplicação Angular para filtros de período, gráficos e tabela. | API E5 disponível; dados reais e estados de histórico insuficiente representados. |
+| E5 | **Implementada (MVP, 2026-11-03):** API Java/Spring Boot somente leitura para o dashboard, reutilizando `ReportApplication.analyze`. Histórico por período depende de E2–E4. | Contrato `/api/village/*` estável sobre o snapshot atual. |
+| E6 | **Implementada (MVP, 2026-11-03):** dashboard Angular consumindo a API real, com progresso, categorias e upgrades. Filtros de período/gráficos temporais dependem de E4. | API E5 disponível e integração CORS verificada. |
 
-Implementar um incremento vertical por vez. E2 não deve incluir a aplicação visual; apenas mapear e registrar o contrato futuro da API e do frontend. O parser de exportação nativa aguarda amostra real e não bloqueia E1. Infraestrutura e evidência podem evoluir antes de catálogo completo, mas indicadores não podem ser publicados como exatos enquanto houver lacunas.
+F0 e E2 podem avançar em paralelo, pois F0 não consulta dados reais nem cria contratos definitivos. E2 não deve incluir a aplicação visual. O parser de exportação nativa aguarda amostra real e não bloqueia E1. Infraestrutura e evidência podem evoluir antes de catálogo completo, mas indicadores não podem ser publicados como exatos enquanto houver lacunas.
 
 ## 4. E1 — Captura integral da API (implementada em 2026-10-21)
 
@@ -136,15 +139,22 @@ Inicialmente o período é selecionado na geração Java. O filtro da planilha a
 - Validar datas, jogador, categoria, cobertura e ausência de baseline. A API deve devolver as datas/IDs efetivamente usados e avisos de lacunas.
 - Credenciais do banco e `CLASH_API_TOKEN` ficam no backend. Limitar CORS ao endereço local do Angular durante desenvolvimento; não publicar a API nesta etapa.
 
-### E6 — frontend Angular (planejado)
+### F0 — fundação do frontend Angular (iniciada)
 
-- Criar a aplicação em `frontend/`, inicialmente no mesmo repositório Git do Java. Essa organização reduz configuração e facilita o desenvolvimento local; só dividir em outro repositório quando implantação ou ciclo de versão independente trouxer benefício concreto.
-- Usar Angular por ser a tecnologia que o usuário já conhece, com Router para as telas e `HttpClient` para consumir exclusivamente a API E5. O navegador nunca acessa PostgreSQL nem recebe token/credenciais.
+- Repositório: `C:\Kiro\clash-village-tracker-frontend`, remoto GitHub próprio e branch `main`. A URL deve usar a autenticação SSH já configurada, não HTTPS sem credencial.
+- Gerar workspace Angular 21 com SCSS e Router, usando Node 22.12.0. Não usar Angular novo com Node 12, pois essa combinação não é suportada.
+- Criar estrutura de tela inicial sem dados falsos de evolução: shell, rota de dashboard, estados explícitos de API indisponível e histórico ainda indisponível. Não colocar token, senha de banco ou URL com credencial em `environment`.
+- Criar serviço HTTP e tipos de resposta como contrato provisório, sem inventar uma API concluída. A URL local do backend será configurada externamente quando E5 existir.
+- Commitar e publicar a fundação no repositório frontend depois de `npm run build` aprovado. A criação do banco, API Java, gráficos de evolução e filtros com dados reais permanecem fora de F0.
+
+### E6 — frontend Angular com dados reais (planejado)
+
+- Evoluir o workspace Angular no repositório `C:\Kiro\clash-village-tracker-frontend`. Usar Router e `HttpClient` para consumir exclusivamente a API E5. O navegador nunca acessa PostgreSQL nem recebe token/credenciais.
 - Primeira tela: jogador e intervalo de datas (incluindo atalho de 15 dias), cartões de cobertura e pendências, gráfico temporal e tabela filtrável por categoria/entidade.
 - Mostrar somente observações reais, indicar datas efetivas, baseline ausente, intervalos sem coleta e cobertura incompleta. Não preencher pontos de gráfico por interpolação nem apresentar snapshot histórico como consulta atual.
 - Escolher biblioteca de gráficos ao implementar a primeira tela, comparando compatibilidade e manutenção com a versão Angular adotada.
 
-E2 deve apenas registrar esse mapa e o contrato preliminar; não criar frontend ou API durante a implementação de persistência. A sequência é E2 → E3 → E4 → E5 → E6, com testes e documentação por etapa.
+E2 deve apenas registrar o contrato preliminar do frontend; F0 é uma fundação independente. A sequência dos dados é E2 → E3 → E4 → E5 → E6, com testes e documentação por etapa.
 
 ## 9. Entrega por sessão
 

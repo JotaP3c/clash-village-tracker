@@ -1,6 +1,6 @@
 # Design técnico — estado atual e evolução
 
-Atualizado em 2026-10-21. PostgreSQL, API de leitura, consultas temporais e interface descritos abaixo estão planejados. Recomenda-se Angular e Spring Boot; ainda não foram implementados. A sequência e os aceites estão em [next-steps.md](next-steps.md).
+Atualizado em 2026-10-21. PostgreSQL, API de leitura e consultas temporais descritos abaixo estão planejados. A fundação Angular será criada no repositório separado `C:\Kiro\clash-village-tracker-frontend`; consumo de dados reais continua planejado. A sequência e os aceites estão em [next-steps.md](next-steps.md).
 
 ## Estrutura existente
 
@@ -87,9 +87,9 @@ Propostas a detalhar e implementar depois: migração explícita do schema, impo
 
 ## Backend e frontend futuros
 
-Fluxo recomendado: `Angular frontend → Java REST API (Spring Boot) → casos de uso/repositórios → PostgreSQL`. O frontend não conecta diretamente ao banco nem recebe `CLASH_API_TOKEN`/credenciais de banco. O backend reutiliza o domínio e devolve DTOs independentes do XLSX; endpoints propostos para detalhar antes de implementar: lista de snapshots por jogador/período, resumo do dashboard e evolução por entidade/categoria. A API inicial é local e somente leitura, com CORS limitado ao endereço de desenvolvimento do Angular. Para reduzir manutenção inicial, `frontend/` fica no mesmo repositório Git; separar depois somente se a implantação ou o ciclo de versão independente justificarem.
+Fluxo recomendado: `Angular frontend → Java REST API (Spring Boot) → casos de uso/repositórios → PostgreSQL`. O frontend não conecta diretamente ao banco nem recebe `CLASH_API_TOKEN`/credenciais de banco. O backend reutiliza o domínio e devolve DTOs independentes do XLSX; endpoints propostos para detalhar antes de implementar: lista de snapshots por jogador/período, resumo do dashboard e evolução por entidade/categoria. A API inicial é local e somente leitura, com CORS limitado ao endereço de desenvolvimento do Angular. O frontend está no repositório Git separado `C:\Kiro\clash-village-tracker-frontend`; o contrato HTTP deve ser versionado e compatível com essa separação.
 
-O Angular é a preferência recomendada porque o usuário já o utiliza. A primeira interface terá jogador e intervalo de datas, cobertura e pendências, séries históricas e tabela filtrável; ausência de baseline e dados incompletos serão estados explícitos. A biblioteca de gráficos será escolhida ao montar a primeira tela, conforme compatibilidade e manutenção da versão Angular adotada. Manter o frontend em `frontend/` e preservar o JAR/CLI offline enquanto se decide a menor integração Maven para a API.
+O Angular é a preferência recomendada porque o usuário já o utiliza. A fundação usa Angular 21 com Node 22.12.0, SCSS e Router. A primeira interface com dados reais terá jogador e intervalo de datas, cobertura e pendências, séries históricas e tabela filtrável; ausência de baseline e dados incompletos serão estados explícitos. A biblioteca de gráficos será escolhida ao montar essa tela, conforme compatibilidade e manutenção da versão Angular adotada. O JAR/CLI offline do backend permanece independente do frontend.
 
 ### Referências oficiais para as escolhas recomendadas
 
