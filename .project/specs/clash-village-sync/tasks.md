@@ -80,7 +80,7 @@ Verificação desta entrega: `.\mvnw.cmd -o verify` e regressão offline registr
 
 ## E6 — Frontend Angular com dados reais
 
-- [ ] E6.1 Evoluir a aplicação em `C:\Kiro\clash-village-tracker-frontend` para consumir a API E5.
+- [ ] E6.1 Evoluir a aplicação em `clash-village-tracker-frontend` para consumir a API E5.
 - [ ] E6.2 Implementar seleção de jogador/período, resumo de cobertura/pendências e tabela filtrável por categoria/entidade.
 - [ ] E6.3 Mostrar gráficos temporais somente com observações existentes, indicando datas efetivas e intervalos sem baseline.
 - [ ] E6.4 Escolher biblioteca de gráficos compatível com a versão Angular adotada e testar vazio, erro HTTP, carga e filtro.

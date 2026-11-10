@@ -12,7 +12,7 @@ Data da decisão original: 2026-10-21. E1 foi implementada e verificada localmen
 - Nome proposto para o banco de desenvolvimento dedicado: `clash_village_tracker_dev`. Criar/conectar somente quando o alvo e as credenciais estiverem configurados e confirmados; nunca reutilizar outro banco por suposição.
 - Flyway é a ferramenta recomendada para migrações SQL versionadas. DBeaver fica para administração e inspeção, não para guardar credenciais no código.
 - Recomendação de interface: Angular, aproveitando a experiência do usuário. Recomendação de API de leitura: Spring Boot sobre Java 17, reaproveitando o domínio e os casos de uso atuais.
-- O frontend foi separado pelo usuário em `C:\Kiro\clash-village-tracker-frontend`, com remoto próprio. Ele usará Angular 21 e Node 22.12.0, ambos instalados localmente. Criar repositórios Java/adaptadores PostgreSQL em `persistence` no backend.
+- O frontend foi separado pelo usuário em `clash-village-tracker-frontend`, com remoto próprio. Ele usará Angular 21 e Node 22.12.0, ambos instalados localmente. Criar repositórios Java/adaptadores PostgreSQL em `persistence` no backend.
 - O navegador acessará somente a API HTTP. PostgreSQL e token da Supercell serão acessados apenas pelo processo backend.
 - Snapshot histórico inicial: 2026-10-19, 123 registros em 12 categorias. Nenhuma coleta anterior foi comprovada; uma comparação de 15 dias não estará disponível só com essa fotografia.
 - E1 preserva bytes HTTP, SHA-256, metadados allowlisted e perfil interpretado separado em coletas locais imutáveis; testes locais não consultam a API real.
@@ -141,7 +141,7 @@ Inicialmente o período é selecionado na geração Java. O filtro da planilha a
 
 ### F0 — fundação do frontend Angular (iniciada)
 
-- Repositório: `C:\Kiro\clash-village-tracker-frontend`, remoto GitHub próprio e branch `main`. A URL deve usar a autenticação SSH já configurada, não HTTPS sem credencial.
+- Repositório: `clash-village-tracker-frontend`, remoto GitHub próprio e branch `main`. A URL deve usar a autenticação SSH já configurada, não HTTPS sem credencial.
 - Gerar workspace Angular 21 com SCSS e Router, usando Node 22.12.0. Não usar Angular novo com Node 12, pois essa combinação não é suportada.
 - Criar estrutura de tela inicial sem dados falsos de evolução: shell, rota de dashboard, estados explícitos de API indisponível e histórico ainda indisponível. Não colocar token, senha de banco ou URL com credencial em `environment`.
 - Criar serviço HTTP e tipos de resposta como contrato provisório, sem inventar uma API concluída. A URL local do backend será configurada externamente quando E5 existir.
@@ -149,7 +149,7 @@ Inicialmente o período é selecionado na geração Java. O filtro da planilha a
 
 ### E6 — frontend Angular com dados reais (planejado)
 
-- Evoluir o workspace Angular no repositório `C:\Kiro\clash-village-tracker-frontend`. Usar Router e `HttpClient` para consumir exclusivamente a API E5. O navegador nunca acessa PostgreSQL nem recebe token/credenciais.
+- Evoluir o workspace Angular no repositório `clash-village-tracker-frontend`. Usar Router e `HttpClient` para consumir exclusivamente a API E5. O navegador nunca acessa PostgreSQL nem recebe token/credenciais.
 - Primeira tela: jogador e intervalo de datas (incluindo atalho de 15 dias), cartões de cobertura e pendências, gráfico temporal e tabela filtrável por categoria/entidade.
 - Mostrar somente observações reais, indicar datas efetivas, baseline ausente, intervalos sem coleta e cobertura incompleta. Não preencher pontos de gráfico por interpolação nem apresentar snapshot histórico como consulta atual.
 - Escolher biblioteca de gráficos ao implementar a primeira tela, comparando compatibilidade e manutenção com a versão Angular adotada.

@@ -21,7 +21,7 @@
 
 ```powershell
 # Backend (offline, sem banco)
-cd C:\Kiro\CoC\clash-village-tracker
+cd clash-village-tracker
 .\mvnw.cmd -s ci-settings.xml spring-boot:run
 
 # Backend com histórico SQL Server
@@ -29,7 +29,7 @@ $env:CLASH_DB_PASSWORD = "<senha do login clash_app>"
 .\mvnw.cmd -s ci-settings.xml spring-boot:run -Dspring-boot.run.arguments=--tracker.db.enabled=true
 
 # Frontend (Node 22)
-cd C:\Kiro\CoC\clash-village-tracker-frontend
+cd clash-village-tracker-frontend
 npm start   # http://localhost:4200
 ```
 

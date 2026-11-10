@@ -5,7 +5,7 @@
 ## 1. Data e repositório
 
 - **Data:** 2026-11-03
-- **Repositório:** `C:\Kiro\CoC\clash-village-tracker` (backend Java 17 / Maven)
+- **Repositório:** `clash-village-tracker` (backend Java 17 / Maven)
 - **Branch:** `develop`
 - **Escopo:** validação pré-commit da camada web REST adicionada nesta sessão (E5), sem commit/push.
 

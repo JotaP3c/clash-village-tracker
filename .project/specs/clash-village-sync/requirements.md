@@ -9,7 +9,7 @@ Executar localmente uma aplicação Java que importe evidências da vila, reconc
 - PostgreSQL é a persistência escolhida para a próxima etapa; DBeaver será usado para administrar e inspecionar os dados. A aplicação se conectará via JDBC.
 - O modo offline JSON/CSV deve continuar funcionando sem banco, token ou internet.
 - O snapshot de 2026-10-19 é histórico. O banco não cria observações de datas anteriores às fontes disponíveis.
-- A fundação da interface será Angular 21, considerando a experiência prévia do usuário, no repositório separado `C:\Kiro\clash-village-tracker-frontend`. O consumo de dados reais só começa após uma API de leitura estável.
+- A fundação da interface será Angular 21, considerando a experiência prévia do usuário, no repositório separado `clash-village-tracker-frontend`. O consumo de dados reais só começa após uma API de leitura estável.
 - Recomendação para a API de leitura: Spring Boot em Java, mantendo regras de domínio e CLI offline existentes. Confirmar a integração menos disruptiva com o Maven atual antes de criar módulos ou mover pacotes.
 - O navegador chama somente a API HTTP. Credenciais do PostgreSQL e `CLASH_API_TOKEN` permanecem no backend/processo local e nunca são incluídas no frontend.
 - A ferramenta recomendada para migrações versionadas é Flyway; confirmar compatibilidade e fixar versão na etapa E2.
