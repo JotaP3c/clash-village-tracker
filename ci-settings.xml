@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Local build settings that resolve from Maven Central directly.
+
+  Why this exists: the developer machine's global ~/.m2/settings.xml routes every repository to a
+  corporate Artifactory (maven.senior.com.br) that is only reachable on the company network. When
+  that mirror is unreachable, Maven cannot download public artifacts (for example the JUnit Platform
+  launcher that Surefire needs), so tests fail with "Cannot access ... in offline mode".
+
+  Pass it explicitly with:  mvnw.cmd -s ci-settings.xml ...
+  It does NOT modify the global settings and is ignored by default builds.
+-->
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              https://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <mirrors>
+        <mirror>
+            <id>maven-central-direct</id>
+            <name>Maven Central (direct)</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <mirrorOf>*</mirrorOf>
+        </mirror>
+    </mirrors>
+</settings>
